@@ -1,0 +1,21 @@
+h1 {
+  font-size: 50px;
+}
+
+ul li {
+  background-color: #4ecdc4;
+  padding: 4px 16px;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  width: 120px;
+  text-align : center;
+}
+
+span {
+  color: #4ecdc4;
+}
+
+p {
+  color: white;
+}

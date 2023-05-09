@@ -1,0 +1,62 @@
+<div class="container mx-auto grid grid-cols-2 h-screen">
+  <div class="col-span-1 flex flex-col justify-center w-1/2">
+    <h1>Welcome back !</h1>
+    <p>Welcome back ! Please enter your details</p>
+
+    <form (submit)="handleSubmitUser($event)" [formGroup]="user">
+      <div class="mt-10">
+        <label>email</label>
+        <input
+          type="email"
+          placeholder="ex@gmail.com"
+          class="mb-5"
+          formControlName="email"
+          required
+        />
+        <!-- <p>{{ user | json }}</p> -->
+        <!-- <p *ngIf="user.errors?.['required']" class="text-red-500">
+          Email is required
+        </p> -->
+
+        <div
+          *ngIf="
+            user.controls['email'].invalid &&
+            (user.controls['email'].dirty || user.controls['email'].touched)
+          "
+        >
+          <div *ngIf="user.controls['email'].errors?.['required']">
+            Email is required
+          </div>
+        </div>
+
+        <label>password</label>
+        <input
+          type="password"
+          placeholder="password"
+          class="mb-10"
+          formControlName="password"
+          required
+        />
+
+        <p>Value : {{ user.value | json }}</p>
+        <p>Status : {{ user.status | json }}</p>
+        <!-- <input type="submit" class="mb-5" value="Log In" /> -->
+        <!-- <p>Log In</p>
+      </input> -->
+
+        <button type="submit" class="mb-5" value="Log In">
+          <p>Log In</p>
+        </button>
+      </div>
+
+      <p class="text-center">
+        Don't have an account?
+        <a class="text-customBlue" routerLink="/signup-component">Sign up</a>
+      </p>
+    </form>
+  </div>
+
+  <div class="col-span-1 flex justify-center items-center">
+    <img src="../../../assets/images/Mobile.png" />
+  </div>
+</div>
