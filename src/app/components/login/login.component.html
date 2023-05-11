@@ -3,13 +3,13 @@
     <h1>Welcome back !</h1>
     <p>Welcome back ! Please enter your details</p>
 
-    <form (submit)="handleSubmitUser($event)" [formGroup]="user">
+    <form (ngSubmit)="handleSubmitUser($event)" [formGroup]="userForm">
       <div class="mt-10">
         <label>email</label>
         <input
           type="email"
           placeholder="ex@gmail.com"
-          class="mb-5"
+          class="mb-2 focus:outline-none focus:border-2 focus:border-primary"
           formControlName="email"
           required
         />
@@ -17,8 +17,9 @@
         <!-- <p *ngIf="user.errors?.['required']" class="text-red-500">
           Email is required
         </p> -->
+        <div *ngIf="email && email.invalid && email.touched" class="text-red-600 mb-5">Email is invalid. Please check it again.</div>
 
-        <div
+        <!-- <div
           *ngIf="
             user.controls['email'].invalid &&
             (user.controls['email'].dirty || user.controls['email'].touched)
@@ -27,24 +28,28 @@
           <div *ngIf="user.controls['email'].errors?.['required']">
             Email is required
           </div>
-        </div>
+        </div> -->
 
         <label>password</label>
         <input
           type="password"
           placeholder="password"
-          class="mb-10"
+          class="mb-2 focus:outline-none focus:border-2 focus:border-primary"
           formControlName="password"
           required
         />
+        
 
-        <p>Value : {{ user.value | json }}</p>
-        <p>Status : {{ user.status | json }}</p>
+        <!-- <div *ngIf="password && password.invalid && password.touched" class="text-red-600 mb-5">Must contain at least 8 characters, one uppercase,lowercase, and one number</div> -->
+        <div *ngIf="password && password.invalid && password.touched" class="text-red-600 mb-5">Must contain at least 8 characters.</div>
+
+        <!-- <p>Value : {{ user.value | json }}</p>
+        <p>Status : {{ user.status | json }}</p> -->
         <!-- <input type="submit" class="mb-5" value="Log In" /> -->
         <!-- <p>Log In</p>
       </input> -->
 
-        <button type="submit" class="mb-5" value="Log In">
+        <button type="submit" class="mb-5" value="Log In" [disabled]="userForm.invalid">
           <p>Log In</p>
         </button>
       </div>
