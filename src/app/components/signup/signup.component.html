@@ -1,1 +1,51 @@
-<p>signup works!</p>
+<div class="container mx-auto flex items-center h-screen">
+  <div class="grid grid-cols-2">
+    <div class="col-span-1">
+      <h1>Organize your life, one task at a time with Task<span>Zone</span></h1>
+
+      <img src="../../../assets/images/Mobile.png" />
+    </div>
+
+    <div class="col-span-1">
+      <p class="pb-5">Sign up for Task<span>Zone</span></p>
+
+      <form (submit)="handleSubmitUser($event)" [formGroup]="userForm">
+        <label for="email">email</label> <br />
+        <input
+          type="email"
+          placeholder="ex@gmail.com"
+          class="mb-2 focus:outline-none focus:border-2 focus:border-primary"
+          formControlName="email"
+          required
+        />
+
+        <div
+          *ngIf="email && email.invalid && email.touched"
+          class="text-red-600 mb-5"
+        >
+          Email is invalid. Please check it again.
+        </div>
+
+        <label for="password">password</label> <br />
+        <input
+          type="password"
+          placeholder="password"
+          class="mb-2 focus:outline-none focus:border-2 focus:border-primary"
+          formControlName="password"
+          required
+        />
+
+        <div
+          *ngIf="password && password.invalid && password.touched"
+          class="text-red-600 mb-5"
+        >
+          Must contain at least 8 characters.
+        </div>
+
+        <button type="submit" [disabled]="userForm.invalid" value="register">
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
