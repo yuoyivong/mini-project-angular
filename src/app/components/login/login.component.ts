@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { PasswordValidation } from './password-validation';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +14,7 @@ import { PasswordValidation } from './password-validation';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  // constructor(private loginForm: FormBuilder) {}
+  constructor(private authService: AuthenticationService) {}
 
   users: any[] = [];
 
@@ -19,22 +25,35 @@ export class LoginComponent {
   // });
 
   userForm = new FormGroup({
-    email : new FormControl('', [Validators.required, Validators.email]),
-    password : new FormControl('', [Validators.required, Validators.minLength(8)])
-  })
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+  });
 
   handleSubmitUser = (e: SubmitEvent) => {
     e.preventDefault();
 
-    this.users.push(this.userForm.value);
-    console.log(this.userForm);
+    // this.users.push(this.userForm.value);
+    // console.log(this.userForm);
+
+    const loginRequest = {
+      email: this.userForm.value.email!,
+      password: this.userForm.value.password!,
+    };
+    this.authService.userLogin(loginRequest).subscribe((response) => {
+      console.log('res : ', response); 
+      localStorage.setItem("token", response.payload.token)
+    });
+   
   };
 
   get email() {
-    return this.userForm.get('email')
+    return this.userForm.get('email');
   }
 
   get password() {
-    return this.userForm.get('password')
+    return this.userForm.get('password');
   }
 }

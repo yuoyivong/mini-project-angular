@@ -15,7 +15,8 @@ button {
   padding: 10px;
   border-radius: 5px;
   color: white;
-  margin-top : 20px;
+  margin-top: 20px;
+  font-size: 20px;
 }
 
 input {
@@ -25,8 +26,13 @@ input {
   font-size: 14px;
   padding-left: 10px;
   width: 100%;
+  margin-bottom : 20px;
 }
 
 h1 {
+  font-size: 50px;
+}
+
+p {
   font-size: 50px;
 }

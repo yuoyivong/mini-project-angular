@@ -1,5 +1,5 @@
-<div class="container mx-auto grid grid-cols-2 h-screen">
-  <div class="col-span-1 flex flex-col justify-center w-1/2">
+<div class="grid grid-cols-2 h-screen ">
+  <div class="col-span-1 flex flex-col justify-center w-1/2 mx-auto">
     <h1>Welcome back !</h1>
     <p>Welcome back ! Please enter your details</p>
 
@@ -17,7 +17,12 @@
         <!-- <p *ngIf="user.errors?.['required']" class="text-red-500">
           Email is required
         </p> -->
-        <div *ngIf="email && email.invalid && email.touched" class="text-red-600 mb-5">Email is invalid. Please check it again.</div>
+        <div
+          *ngIf="email && email.invalid && email.touched"
+          class="text-red-600 mb-5"
+        >
+          Email is invalid. Please check it again.
+        </div>
 
         <!-- <div
           *ngIf="
@@ -38,10 +43,14 @@
           formControlName="password"
           required
         />
-        
 
         <!-- <div *ngIf="password && password.invalid && password.touched" class="text-red-600 mb-5">Must contain at least 8 characters, one uppercase,lowercase, and one number</div> -->
-        <div *ngIf="password && password.invalid && password.touched" class="text-red-600 mb-5">Must contain at least 8 characters.</div>
+        <div
+          *ngIf="password && password.invalid && password.touched"
+          class="text-red-600 mb-5"
+        >
+          Must contain at least 8 characters.
+        </div>
 
         <!-- <p>Value : {{ user.value | json }}</p>
         <p>Status : {{ user.status | json }}</p> -->
@@ -49,7 +58,12 @@
         <!-- <p>Log In</p>
       </input> -->
 
-        <button type="submit" class="mb-5" value="Log In" [disabled]="userForm.invalid">
+        <button
+          type="submit"
+          class="mb-5"
+          value="Log In"
+          [disabled]="userForm.invalid"
+        >
           <p>Log In</p>
         </button>
       </div>

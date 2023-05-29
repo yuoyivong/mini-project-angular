@@ -1,12 +1,12 @@
 <div class="container mx-auto flex items-center h-screen">
   <div class="grid grid-cols-2">
-    <div class="col-span-1">
-      <h1>Organize your life, one task at a time with Task<span>Zone</span></h1>
+    <div class="col-span-1 flex flex-col items-center">
+      <!-- <h1>Organize your life, one task at a time with Task<span>Zone</span></h1> -->
 
-      <img src="../../../assets/images/Mobile.png" />
+      <img src="../../../assets/images/Mobile.png" class="w-[80%]" />
     </div>
 
-    <div class="col-span-1">
+    <div class="col-span-1 flex flex-col justify-center w-[80%] mx-auto">
       <p class="pb-5">Sign up for Task<span>Zone</span></p>
 
       <form (submit)="handleSubmitUser($event)" [formGroup]="userForm">
@@ -39,10 +39,19 @@
           *ngIf="password && password.invalid && password.touched"
           class="text-red-600 mb-5"
         >
-          Must contain at least 8 characters.
+          <!-- Must contain at least 8 characters. -->
+          <!-- {{password.errors | json}} -->
+          Must contain at least 8 characters, one uppercase,lowercase, and one
+          number
         </div>
 
-        <button type="submit" [disabled]="userForm.invalid" value="register">
+        <button
+          type="submit"
+          [disabled]="userForm.invalid"
+          value="register"
+          class="cursor-pointer"
+          
+        >
           Register
         </button>
       </form>
