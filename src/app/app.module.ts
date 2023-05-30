@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TaskPageComponent } from './pages/task-page/task-page.component';
 import { JwtInterceptor } from './interceptors/jwt-interceptor';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { JwtInterceptor } from './interceptors/jwt-interceptor';
     SignupComponent,
     NavbarComponent,
     TaskPageComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
