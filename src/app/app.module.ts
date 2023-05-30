@@ -13,6 +13,7 @@ import { TaskPageComponent } from './pages/task-page/task-page.component';
 import { JwtInterceptor } from './interceptors/jwt-interceptor';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BoardComponent } from './components/board/board.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     TaskPageComponent,
     NotFoundPageComponent,
     SidebarComponent,
+    BoardComponent,
   ],
   imports: [
     BrowserModule,

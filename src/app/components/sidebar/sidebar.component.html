@@ -3,18 +3,99 @@
   <hr />
 
   <div class="grid grid-cols-9">
-    <div class="col-span-2 sidebar-bg h-screen">
+    <!-- sidebar -->
+    <div class="col-span-2 sidebar-bg h-screen pl-12 space-y-5">
       <h3>Monster's Workspace</h3>
 
-      <div class="flex pl-10">
-        <img src="../../../assets/images/book 1.png" alt="" />
+      <!-- board -->
+      <a class="flex pl-10 items-center" routerLink="/sidebar/board">
+        <img src="../../../assets/images/book 1.png" alt="" class="w-7 h-7" />
         <p>Boards</p>
-      </div>
+      </a>
 
-      <div class="flex">
-        <img src="../../../assets/images/menu 1.png" alt="" />
+      <!-- category -->
+      <div class="flex pl-10 items-center">
+        <img src="../../../assets/images/category.png" alt="" class="w-7 h-7" />
         <p>Category</p>
       </div>
+
+      <!-- status -->
+      <div
+        class="px-10 flex justify-between items-center"
+        (click)="setIsToggle()"
+      >
+        <div class="flex items-center">
+          <img src="../../../assets/images/report.png" alt="" class="w-7 h-7" />
+          <p>Status</p>
+        </div>
+
+        <div>
+          <img
+            src="../../../assets/images/down-arrow.png"
+            class="w-5 h-5"
+            *ngIf="isChangedImage == false"
+          />
+
+          <img
+            src="../../../assets/images/up-arrow.png"
+            class="w-5 h-5"
+            *ngIf="isChangedImage == true"
+          />
+        </div>
+      </div>
+
+      <div *ngIf="isToggle == true" class="space-y-5">
+        <!-- done -->
+        <div class="flex pl-20 items-center">
+          <img
+            src="../../../assets/images/to-do-list.png"
+            alt=""
+            class="w-7 h-7"
+          />
+          <p>Done</p>
+        </div>
+
+        <!-- progress -->
+        <div class="flex pl-20 items-center">
+          <img
+            src="../../../assets/images/coming-soon 1.png"
+            alt=""
+            class="w-7 h-7"
+          />
+          <p>Progress</p>
+        </div>
+
+        <!-- reviews -->
+        <div class="flex pl-20 items-center">
+          <img
+            src="../../../assets/images/icons8-checking-64 1.png"
+            alt=""
+            class="w-7 h-7"
+          />
+          <p>Reviews</p>
+        </div>
+
+        <!-- not yet -->
+        <div class="flex pl-20 items-center">
+          <img
+            src="../../../assets/images/history.png"
+            alt=""
+            class="w-7 h-7"
+          />
+          <p>Not Yet</p>
+        </div>
+      </div>
+
+      <!-- log out -->
+      <div class="flex pl-10 items-center text-red-600">
+        <img src="../../../assets/images/logout 1.png" alt="" class="w-7 h-7" />
+        <p>Log out</p>
+      </div>
+    </div>
+
+    <!-- outlet for nested routes -->
+    <div class="col-span-7">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

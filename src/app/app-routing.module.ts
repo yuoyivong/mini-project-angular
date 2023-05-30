@@ -7,6 +7,7 @@ import { TaskPageComponent } from './pages/task-page/task-page.component';
 import { OwnerGuard } from './guards/owner.guard';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BoardComponent } from './components/board/board.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -14,7 +15,12 @@ const routes: Routes = [
   { path: 'signup-component', component: SignupComponent },
   { path: 'task', component: TaskPageComponent, canActivate: [OwnerGuard] },
 
-  { path: 'sidebar', component: SidebarComponent, canActivate: [OwnerGuard] },
+  {
+    path: 'sidebar',
+    component: SidebarComponent,
+    canActivate: [OwnerGuard],
+    children: [{ path: 'board', component: BoardComponent }],
+  },
   { path: '**', component: NotFoundPageComponent },
 ];
 
