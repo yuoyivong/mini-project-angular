@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TaskPageComponent } from './pages/task-page/task-page.component';
 import { JwtInterceptor } from './interceptors/jwt-interceptor';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     NavbarComponent,
     TaskPageComponent,
     NotFoundPageComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+span {
+  color: #4ecdc4;
+  font-weight: bold;
+}
+
+h3 {
+  text-size: 30px;
+}
+
+p {
+  padding-left: 5px;
+}
+
+.sidebar-bg {
+  background-color: #effaf9;
+}
