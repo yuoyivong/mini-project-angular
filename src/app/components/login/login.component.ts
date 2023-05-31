@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { PasswordValidation } from './password-validation';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,10 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(private authService: AuthenticationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
   users: any[] = [];
 
@@ -28,7 +32,9 @@ export class LoginComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(8),
+      Validators.pattern(
+        '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$!%*?&])[A-Za-z0-9@#$!%*?&]{8,}'
+      ),
     ]),
   });
 
@@ -43,10 +49,10 @@ export class LoginComponent {
       password: this.userForm.value.password!,
     };
     this.authService.userLogin(loginRequest).subscribe((response) => {
-      console.log('res : ', response); 
-      localStorage.setItem("token", response.payload.token)
+      console.log('res : ', response);
+      localStorage.setItem('token', response.payload.token);
+      this.router.navigate(['/sidebar/board'])
     });
-   
   };
 
   get email() {
