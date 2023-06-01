@@ -14,8 +14,8 @@ import { JwtInterceptor } from './interceptors/jwt-interceptor';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BoardComponent } from './components/board/board.component';
-import { StoreModule } from '@ngrx/store';
-import { TaskReducer } from './reducer/task.reducer';
+import { StoreModule, provideStore } from '@ngrx/store';
+import { taskReducer } from './reducer/task.reducer';
 
 @NgModule({
   declarations: [
@@ -35,8 +35,9 @@ import { TaskReducer } from './reducer/task.reducer';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    // StoreModule.forRoot({tasks : TaskReducer})
+    StoreModule.forRoot({ tasks: taskReducer }),
   ],
+  
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

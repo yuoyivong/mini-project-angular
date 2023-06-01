@@ -12,10 +12,9 @@ export class TaskPageComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
-    this.taskService.fetchAllTask().subscribe(res => {
-      this.tasks = res.payload
-    })
+    // this.taskService.fetchAllTasks().subscribe((res) => {
+    //   // this.tasks = res.payload
+    //   console.log('Task : ', res);
+    // });
   }
-
-
 }

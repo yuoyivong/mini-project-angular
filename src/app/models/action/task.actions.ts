@@ -1,13 +1,13 @@
-import { Action } from "@ngrx/store";
-import { Tasks } from "../tasks.model";
+import { createAction, props } from '@ngrx/store';
+import { Task } from '../tasks.model';
+import { TaskResponse } from '../response/task-response';
 
-export enum TaskActionType {
-    ADD_TASK = '[TASK] Add Task',
-}
+export const getAllTask = createAction(
+  '[Board Component] Get All Task',
+  props<{ tasks: Array<Task> }>()
+);
 
-export class AddTaskAction implements Action {
-    readonly type = TaskActionType.ADD_TASK;
-    constructor(public payload : Tasks) {}
-}
-
-export type TaskAction = AddTaskAction
+export const deleteSpecificTaskById = createAction(
+  '[Board Component] Delete Task By Id',
+  props<{ taskId: number }>
+);

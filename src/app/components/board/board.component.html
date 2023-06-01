@@ -10,25 +10,34 @@
     <div
       [ngClass]="{
         'custom-card relative p-5': true,
-        'bg-orange-400': item.status === 'Review',
-        'bg-green-400': item.status === 'Done',
-        'bg-slate-400': item.status === 'Not Yet',
-        'bg-blue-400': item.status === 'In Progress'
+        'bg-orange-400': item.status === 'is_in_review',
+        'bg-green-400': item.status === 'is_completed',
+        'bg-slate-400': item.status === 'is_cancelled',
+        'bg-blue-400': item.status === 'is_in_progress'
       }"
-      *ngFor="let item of data"
+      *ngFor="let item of task$ | async"
     >
       <div class="flex justify-between">
-        <p class="text-2xl">{{ item.date }}</p>
-        <img src="../../../assets/images/cancel.png" class="w-5 h-5"/>
+        <p class="text-2xl">{{ formattedDate(item.date) }}</p>
+        <img
+          src="../../../assets/images/cancel.png"
+          class="w-5 h-5 cursor-pointer"
+          (click)="delete_task_by_id(item.taskId)"
+        />
       </div>
 
-      <p class="text-xl">{{ item.title }}</p>
+      <p class="text-xl">{{ item.taskName }}</p>
       <p class="text-lg">{{ item.description }}</p>
       <button
         class="px-8 py-2 rounded-lg text-lg absolute bottom-0 bg-white mb-5"
       >
-        {{ item.status }}
+        <p *ngIf="item.status === 'is_in_review'">Review</p>
+        <p *ngIf="item.status === 'is_completed'">Done</p>
+        <p *ngIf="item.status === 'is_cancelled'">Not yet</p>
+        <p *ngIf="item.status === 'is_in_progress'">In Progress</p>
       </button>
     </div>
   </div>
 </div>
+
+<!-- <div>{{ task$ | async | json }}</div> -->
