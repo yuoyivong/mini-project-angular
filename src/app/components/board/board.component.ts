@@ -26,26 +26,29 @@ export class BoardComponent implements OnInit {
     // this.task$ = store.pipe(select('tasks'));
   }
 
-  // task$: Observable<TaskResponse<Tasks>>;
-
-  // task$ = (state: TaskResponse<Tasks>) => console.log(state.payload);
-
-  // get all tasks every time it renders
-  ngOnInit(): void {
+  fetchAndStoreTask() {
     this.taskService.fetchAllTasks().subscribe((response) => {
       console.log('Response : ', response.payload);
       this.store.dispatch(getAllTask({ tasks: response.payload }));
     });
   }
 
+  // task$: Observable<TaskResponse<Tasks>>;
+
+  // task$ = (state: TaskResponse<Tasks>) => console.log(state.payload);
+
+  // get all tasks every time it renders
+  ngOnInit(): void {
+    this.fetchAndStoreTask();
+  }
+
   // delete task by id
   delete_task_by_id(taskId: number) {
     this.taskService.deleteTaskById(taskId).subscribe((response) => {
       console.log('Response : ', response);
+      this.fetchAndStoreTask();
       // this.store.dispatch(deleteSpecificTaskById());
     });
-
-
   }
 
   // format date
