@@ -1,0 +1,32 @@
+<div
+  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
+  *ngIf="isPopup"
+>
+  <div class="card-popup relative" *ngFor="let task of task$ | async">
+    <!-- {{ task$ | async | json }} -->
+    <div class="flex justify-between items-center">
+      <div>
+        <h3>{{ task.taskName }}</h3>
+        <p>Category : {{ task.categoryId }}</p>
+      </div>
+
+      <div>
+        <h4>{{ formattedDate(task.date) }}</h4>
+        <div class="status-btn">
+          <p *ngIf="task.status === 'is_in_review'">Review</p>
+          <p *ngIf="task.status === 'is_completed'">Done</p>
+          <p *ngIf="task.status === 'is_cancelled'">Not yet</p>
+          <p *ngIf="task.status === 'is_in_progress'">In Progress</p>
+        </div>
+      </div>
+    </div>
+    <hr />
+
+    <p class="description">{{ task.description }}</p>
+
+    <div class="absolute bottom-4 right-4">
+      <button class="bg-primary text-white">Update</button>
+      <button class="border ml-3" >Close</button>
+    </div>
+  </div>
+</div>

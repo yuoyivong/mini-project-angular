@@ -16,6 +16,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BoardComponent } from './components/board/board.component';
 import { StoreModule, provideStore } from '@ngrx/store';
 import { taskReducer } from './reducer/task.reducer';
+import { ViewTaskPopupComponent } from './components/view-task-popup/view-task-popup.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { taskReducer } from './reducer/task.reducer';
     NotFoundPageComponent,
     SidebarComponent,
     BoardComponent,
+    ViewTaskPopupComponent,
   ],
   imports: [
     BrowserModule,

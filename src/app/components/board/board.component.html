@@ -6,7 +6,7 @@
   </div>
 
   <!-- custom card -->
-  <div class="mt-7 flex gap-5 flex-wrap">
+  <div class="mt-7 flex gap-5 flex-wrap cursor-pointer" (click)="setIsPopup()">
     <div
       [ngClass]="{
         'custom-card relative p-5': true,
@@ -38,6 +38,11 @@
       </button>
     </div>
   </div>
+
+  <!-- popup card -->
+  <app-view-task-popup *ngIf="isPopup"></app-view-task-popup>
+  <div *ngIf="isPopup" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+  
 </div>
 
 <!-- <div>{{ task$ | async | json }}</div> -->

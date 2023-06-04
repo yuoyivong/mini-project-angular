@@ -63,35 +63,9 @@ export class BoardComponent implements OnInit {
     return newDate;
   }
 
-  // get_all_tasks = this.store.select((getTasks) => console.log());
-  // get_all_tasks() {
-  //   this.store.select((state) => state);
-  // }
-
-  // data = [
-  //   {
-  //     date: 'Thu, Apr 6',
-  //     title: 'Useless',
-  //     description: 'Useless is not always bad.',
-  //     status: 'Review',
-  //   },
-  //   {
-  //     date: 'Thu, Apr 6',
-  //     title: 'Useless',
-  //     description: 'Useless is not always bad.',
-  //     status: 'Done',
-  //   },
-  //   {
-  //     date: 'Thu, Apr 6',
-  //     title: 'Useless',
-  //     description: 'Useless is not always bad.',
-  //     status: 'Not Yet',
-  //   },
-  //   {
-  //     date: 'Thu, Apr 6',
-  //     title: 'Useless',
-  //     description: 'Useless is not always bad.',
-  //     status: 'In Progress',
-  //   },
-  // ];
+  // popup to view the specific task
+  isPopup = false;
+  setIsPopup() {
+    this.isPopup = !this.isPopup;
+  }
 }

@@ -1,0 +1,43 @@
+.card-popup {
+  background-color: green;
+  width: 400px;
+  height: 250px;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.status-btn {
+  background-color: #4ecdc4;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.description {
+  color: black;
+}
+
+h3 {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+h4 {
+  color: red;
+  text-align: right;
+}
+
+p {
+  color: whitesmoke;
+}
+
+hr {
+  margin: 8px 0px;
+}
+
+button {
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+}
