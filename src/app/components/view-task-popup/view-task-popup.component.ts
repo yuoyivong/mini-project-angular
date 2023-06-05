@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getTaskBySpecificId } from 'src/app/models/action/task.actions';
 import { TaskResponse } from 'src/app/models/response/task-response';
 import { Task } from 'src/app/models/tasks.model';
+import { TaskService } from 'src/app/service/task.service';
 
 @Component({
   selector: 'app-view-task-popup',
@@ -10,16 +13,37 @@ import { Task } from 'src/app/models/tasks.model';
   styleUrls: ['./view-task-popup.component.css'],
 })
 export class ViewTaskPopupComponent implements OnInit {
-  task$: Observable<Task[]> = this.store.select('tasks');
+  @Input() public onClose: () => void = () => {};
 
-  constructor(private store: Store<{ tasks: Task[] }>) {}
+  // @Input() public viewTaskBySpecificId!: (id: number) => void;
+
+  @Input() public task!: Task;
+
+  // task$: Observable<Task[]> = this.store.select('tasks');
+
+  constructor(
+    private store: Store<{ tasks: Task[] }>,
+    private taskService: TaskService
+  ) {}
+
   ngOnInit(): void {
-    console.log('Data : ', this.task$);
+    // console.log('Data : ', this.task$);
+    this.taskService.getTaskById(33).subscribe();
   }
 
-  getCardId(id: number) {
-    console.log(id);
+  testGetFromParent(id: number) {
+    console.log('ID : ', id);
+    // this.viewTaskBySpecificId(id);
   }
+
+  // get task id
+  // viewTaskBySpecificId = (id: number): void => {
+  //   console.log('Task id : ', id);
+  //   this.taskService
+  //     .getTaskById(id)
+  //     .subscribe((res) => this.store.dispatch(getTaskBySpecificId()));
+
+  // };
 
   // format date
   formattedDate(date: string) {
@@ -34,8 +58,8 @@ export class ViewTaskPopupComponent implements OnInit {
   }
 
   // popup to view the specific task
-  isPopup = true;
-  setIsPopup() {
-    this.isPopup = !this.isPopup;
-  }
+  // isPopup = true;
+  setIsPopup = (): void => {
+    this.onClose();
+  };
 }

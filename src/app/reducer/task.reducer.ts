@@ -19,5 +19,6 @@ export const taskReducer = createReducer(
   on(TaskAction.getAllTask, (state, { tasks }) => tasks),
   on(TaskAction.deleteSpecificTaskById, (task) =>
     task.filter((taskId) => taskId !== taskId)
-  )
+  ),
+  on(TaskAction.getTaskBySpecificId, (task) => task)
 );

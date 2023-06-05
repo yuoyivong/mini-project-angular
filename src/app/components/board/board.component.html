@@ -8,41 +8,49 @@
   <!-- custom card -->
   <div class="mt-7 flex gap-5 flex-wrap cursor-pointer" (click)="setIsPopup()">
     <div
-      [ngClass]="{
-        'custom-card relative p-5': true,
-        'bg-orange-400': item.status === 'is_in_review',
-        'bg-green-400': item.status === 'is_completed',
-        'bg-slate-400': item.status === 'is_cancelled',
-        'bg-blue-400': item.status === 'is_in_progress'
-      }"
       *ngFor="let item of task$ | async"
+      (click)="selectTask(item)"
     >
-      <div class="flex justify-between">
-        <p class="text-2xl">{{ formattedDate(item.date) }}</p>
-        <img
-          src="../../../assets/images/cancel.png"
-          class="w-5 h-5 cursor-pointer"
-          (click)="delete_task_by_id(item.taskId)"
-        />
-      </div>
-
-      <p class="text-xl">{{ item.taskName }}</p>
-      <p class="text-lg">{{ item.description }}</p>
-      <button
-        class="px-8 py-2 rounded-lg text-lg absolute bottom-0 bg-white mb-5"
+      <div
+        [ngClass]="{
+          'custom-card relative p-5': true,
+          'bg-orange-400': item.status === 'is_in_review',
+          'bg-green-400': item.status === 'is_completed',
+          'bg-slate-400': item.status === 'is_cancelled',
+          'bg-blue-400': item.status === 'is_in_progress'
+        }"
       >
-        <p *ngIf="item.status === 'is_in_review'">Review</p>
-        <p *ngIf="item.status === 'is_completed'">Done</p>
-        <p *ngIf="item.status === 'is_cancelled'">Not yet</p>
-        <p *ngIf="item.status === 'is_in_progress'">In Progress</p>
-      </button>
+        <div class="flex justify-between">
+          <p class="text-2xl">{{ formattedDate(item.date) }}</p>
+          <img
+            src="../../../assets/images/cancel.png"
+            class="w-5 h-5 cursor-pointer"
+            (click)="delete_task_by_id(item.taskId)"
+          />
+        </div>
+
+        <p class="text-xl">{{ item.taskName }}</p>
+        <p class="text-lg">{{ item.description }}</p>
+        <button
+          class="px-8 py-2 rounded-lg text-lg absolute bottom-0 bg-white mb-5"
+        >
+          <p *ngIf="item.status === 'is_in_review'">Review</p>
+          <p *ngIf="item.status === 'is_completed'">Done</p>
+          <p *ngIf="item.status === 'is_cancelled'">Not yet</p>
+          <p *ngIf="item.status === 'is_in_progress'">In Progress</p>
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- popup card -->
-  <app-view-task-popup *ngIf="isPopup"></app-view-task-popup>
+  <app-view-task-popup
+    *ngIf="isPopup"
+    [onClose]="setIsPopup"
+    [task]="task"
+  ></app-view-task-popup>
   <div *ngIf="isPopup" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
-  
 </div>
 
-<!-- <div>{{ task$ | async | json }}</div> -->
+<!-- [viewTaskBySpecificId]="get_task_by_taskId" -->
+<!-- (click)="get_task_by_taskId(item.taskId)" -->

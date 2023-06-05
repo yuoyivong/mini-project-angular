@@ -1,5 +1,5 @@
 .card-popup {
-  background-color: green;
+  background-color: whitesmoke;
   width: 400px;
   height: 250px;
   border-radius: 10px;
@@ -28,9 +28,9 @@ h4 {
   text-align: right;
 }
 
-p {
+/* p {
   color: whitesmoke;
-}
+} */
 
 hr {
   margin: 8px 0px;

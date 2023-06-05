@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import {
   deleteSpecificTaskById,
   getAllTask,
+  getTaskBySpecificId,
 } from 'src/app/models/action/task.actions';
 import { TaskResponse } from 'src/app/models/response/task-response';
 import { Task } from 'src/app/models/tasks.model';
@@ -33,10 +34,6 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  // task$: Observable<TaskResponse<Tasks>>;
-
-  // task$ = (state: TaskResponse<Tasks>) => console.log(state.payload);
-
   // get all tasks every time it renders
   ngOnInit(): void {
     this.fetchAndStoreTask();
@@ -50,6 +47,21 @@ export class BoardComponent implements OnInit {
       // this.store.dispatch(deleteSpecificTaskById());
     });
   }
+
+  get_task_by_taskId = (id: number) => {
+    console.log('Task id : ', id);
+    this.taskService.getTaskById(id).subscribe(res => console.log(res));
+    // this.taskService.getTaskById(id).subscribe((res) => {
+    //   if (id === res.taskId) {
+    //     console.log('Res : ', res);
+    //     this.store.dispatch(getTaskBySpecificId());
+    //   } else {
+    //     console.log(res.taskId + ' not match');
+    //   }
+    // });
+  };
+
+  // get task id
 
   // format date
   formattedDate(date: string) {
@@ -65,7 +77,12 @@ export class BoardComponent implements OnInit {
 
   // popup to view the specific task
   isPopup = false;
-  setIsPopup() {
+  setIsPopup = (): void => {
     this.isPopup = !this.isPopup;
+  };
+
+  task!: Task;
+  selectTask(task: Task){
+    this.task = task;
   }
 }

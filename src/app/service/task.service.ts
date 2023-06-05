@@ -16,6 +16,12 @@ export class TaskService {
     );
   }
 
+  // get task by id
+  getTaskById(taskId: number): Observable<any> {
+    console.log('Task Id : ', taskId);
+    return this.http.get(`${env.apiUrl}/task/get-task-by-id/${taskId}`);
+  }
+
   // delete specific task based on id
   deleteTaskById(taskId: number): Observable<any> {
     return this.http.delete(`${env.apiUrl}/task/delete-task-by-id/${taskId}`);
