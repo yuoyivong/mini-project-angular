@@ -17,7 +17,10 @@ import { BoardComponent } from './components/board/board.component';
 import { StoreModule, provideStore } from '@ngrx/store';
 import { taskReducer } from './reducer/task.reducer';
 import { ViewTaskPopupComponent } from './components/view-task-popup/view-task-popup.component';
-import { AddNewTaskComponent } from './add-new-task/add-new-task.component';
+import { CategoryComponent } from './components/category/category.component';
+import { CategoryPopupComponent } from './components/category-popup/category-popup.component';
+import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
+import { categoryReducer } from './reducer/category.reducer';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { AddNewTaskComponent } from './add-new-task/add-new-task.component';
     BoardComponent,
     ViewTaskPopupComponent,
     AddNewTaskComponent,
+    CategoryComponent,
+    CategoryPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,9 +44,9 @@ import { AddNewTaskComponent } from './add-new-task/add-new-task.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ tasks: taskReducer }),
+    StoreModule.forRoot({ tasks: taskReducer, categories: categoryReducer }),
   ],
-  
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

@@ -9,6 +9,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BoardComponent } from './components/board/board.component';
 import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
+import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
     children: [
       { path: 'board', component: BoardComponent },
       { path: 'addNewTask', component: AddNewTaskComponent },
+      { path: 'category', component: CategoryComponent },
     ],
   },
   { path: '**', component: NotFoundPageComponent },

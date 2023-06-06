@@ -1,0 +1,23 @@
+h5,
+label {
+  font-size: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid gray;
+  margin-top: 5px;
+  font-size : 16px;
+}
+
+button {
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  background-color : #4ECDC4;
+  margin: 20px 0px;
+  color : white;
+
+}
