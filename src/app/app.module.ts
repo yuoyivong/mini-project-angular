@@ -17,6 +17,7 @@ import { BoardComponent } from './components/board/board.component';
 import { StoreModule, provideStore } from '@ngrx/store';
 import { taskReducer } from './reducer/task.reducer';
 import { ViewTaskPopupComponent } from './components/view-task-popup/view-task-popup.component';
+import { AddNewTaskComponent } from './add-new-task/add-new-task.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ViewTaskPopupComponent } from './components/view-task-popup/view-task-p
     SidebarComponent,
     BoardComponent,
     ViewTaskPopupComponent,
+    AddNewTaskComponent,
   ],
   imports: [
     BrowserModule,

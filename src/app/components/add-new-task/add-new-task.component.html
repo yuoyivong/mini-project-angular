@@ -1,0 +1,48 @@
+<div>
+  <div>
+    <h4>add new task</h4>
+    <div>
+      <div class="grid grid-cols-3">
+        <div class="col-span-1">
+          <label for="data">Date</label> <br />
+          <input type="date" name="date" id="date" />
+        </div>
+
+        <div class="col-span-1">
+          <label for="category">Category</label> <br />
+          <select>
+            <option>Beverages</option>
+            <option>Ey kor ban</option>
+          </select>
+        </div>
+
+        <div class="col-span-1">
+          <label for="status">Status</label> <br />
+          <select>
+            <option>In Progress</option>
+            <option>Review</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <label for="title">Title</label> <br />
+        <input type="text" name="title" id="title" />
+      </div>
+
+      <div>
+        <label for="description">Description</label>
+        <textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button>Submit</button>
+</div>
