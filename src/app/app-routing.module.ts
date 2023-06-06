@@ -8,6 +8,7 @@ import { OwnerGuard } from './guards/owner.guard';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BoardComponent } from './components/board/board.component';
+import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -19,7 +20,10 @@ const routes: Routes = [
     path: 'sidebar',
     component: SidebarComponent,
     canActivate: [OwnerGuard],
-    children: [{ path: 'board', component: BoardComponent }],
+    children: [
+      { path: 'board', component: BoardComponent },
+      { path: 'category', component: CategoryComponent },
+    ],
   },
   { path: '**', component: NotFoundPageComponent },
 ];
