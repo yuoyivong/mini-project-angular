@@ -29,17 +29,20 @@ export class CategoryComponent implements OnInit {
     this.fetchAllCategories();
   }
 
-  // // popup category
-  // isCategoryPopup = false;
-  // setIsCategoryPopup = (): void => {
-  //   this.isCategoryPopup != this.isCategoryPopup;
-  // };
 
-  // popup to view the specific task
+  // popup to add category
   isPopup = false;
   setIsPopup = (): void => {
     this.isPopup = !this.isPopup;
   };
+
+  // edit and delete popup with specifi card
+  showIndex = 0;
+  isEditDelete = false;
+  setIsEditDelete = (i : number) : void => {
+    this.isEditDelete = !this.isEditDelete
+    this.showIndex = i;
+  }
 
   // format date
   formattedDate(date: string) {

@@ -14,7 +14,7 @@
     <!-- each card -->
     <div
       class="relative w-72 border-2 rounded-lg h-28 shadow-md pl-3 flex items-center"
-      *ngFor="let category of category$ | async"
+      *ngFor="let category of category$ | async; let i = index"
     >
       <div class="h-24 bg-primary rounded-md w-2"></div>
       <div>
@@ -22,10 +22,39 @@
         <p class="created-text">Created: {{ formattedDate(category.date) }}</p>
       </div>
 
-      <img
-        src="../../../assets/images/svg/Icon.svg"
-        class="absolute right-3 top-3"
-      />
+      <div class="absolute right-3 top-3 cursor-pointer">
+        <img
+          src="../../../assets/images/svg/Icon.svg"
+          class="relative"
+          (click)="setIsEditDelete(i)"
+        />
+      </div>
+
+      <!-- popup edit and delete -->
+      <div
+        *ngIf="isEditDelete && showIndex === i"
+        class="absolute top-7 -right-6"
+      >
+        <div
+          class="w-36 border-2 shadow-md rounded-md h-24 flex flex-col justify-center pl-5 bg-white"
+        >
+          <div class="flex gap-5">
+            <img
+              src="../../../assets/images/svg/Group.svg"
+              class="w-4 h-auto"
+            />
+            <h4 class="text-lg">Edit</h4>
+          </div>
+
+          <div class="flex gap-5">
+            <img
+              src="../../../assets/images/svg/Vector (1).svg"
+              class="w-4 h-auto"
+            />
+            <h4 class="text-lg text-red-600">Delete</h4>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
