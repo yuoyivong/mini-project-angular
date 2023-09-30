@@ -1,0 +1,72 @@
+version: '3.8'
+
+x-database-env: &database-env
+  POSTGRES_DB: keycloak
+  POSTGRES_USER: keycloak
+  POSTGRES_PASSWORD: password
+
+x-keycloak-env: &keycloak-env
+  DB_VENDOR: POSTGRES
+  DB_ADDR: keycloak-database
+  DB_DATABASE: keycloak
+  DB_USER: keycloak
+  DB_SCHEMA: public
+  DB_PASSWORD: password
+  KEYCLOAK_USER: admin
+  KEYCLOAK_PASSWORD: kcpassword
+  KEYCLOAK_LOGLEVEL: DEBUG
+  # KEYCLOAK_IMPORT: /opt/realm.json -Dkeycloak.profile.feature.upload_scripts=enabled
+  ROOT_LOGLEVEL: DEBUG
+
+volumes:
+  keycloak_data:
+
+networks:
+  oauth-testing:
+
+services:
+  keycloak-database:
+    image: postgres:14.4-alpine
+    restart: unless-stopped
+    volumes:
+      - keycloak_data:/var/lib/postgresql/data
+    container_name: keycloak-database-testing
+    healthcheck:
+      test: [ "CMD","pg_isready","-U","keycloak" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    environment:
+      <<: *database-env
+    ports:
+      - "5482:5432"
+#    networks:
+#      - oauth-testing
+
+  keycloak-service:
+    image: jboss/keycloak:16.1.1
+    restart: unless-stopped
+    container_name: keycloak-server-testing
+    #volumes:
+    #  - ../keycloak/realm.json:/opt/realm.json
+    environment:
+      <<: *keycloak-env
+    ports:
+      - "9900:8080"
+      - "8448:8443"
+    depends_on:
+      - keycloak-database
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "--fail",
+          "http://localhost:9900/auth/realms/master"
+        ]
+      interval: 20s
+      timeout: 3s
+      start_period: 10s
+      retries: 3
+#    networks:
+#      - oauth-testing

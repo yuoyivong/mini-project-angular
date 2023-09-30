@@ -1,0 +1,139 @@
+<div>
+  <div
+    class="grid grid-cols-2 container mx-auto rounded-lg m-16 border h-[743px]"
+  >
+    <!-- image -->
+    <div class="col-span-1 h-full bg-blueBg rounded-l-lg">
+      <div class="text-white uppercase p-10 text-xl">mybook</div>
+      <div class="text-white flex flex-col items-center">
+        <img src="../../../assets/images/svg/Artboard 15@2x 1.svg" />
+        <p class="text-lg">Welcome to MYBOOK</p>
+        <p class="text-sm">There is no friend as loyal as a book.</p>
+      </div>
+    </div>
+
+    <!-- sign in -->
+    <div class="col-span-1 flex flex-col items-center justify-center">
+      <div>
+        <div class="flex flex-col items-center">
+          <img src="../../../assets/images/svg/Group 7579.svg" alt="" />
+          <p class="uppercase text-4xl">welcome</p>
+        </div>
+
+        <form [formGroup]="loginForm">
+          <div>
+            <div class="relative mb-3 mt-8 text-center">
+              <!-- <div
+                  class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none"
+                >
+                  <img src="../../../assets/images/icon.svg" alt="" />
+                </div> -->
+              <input
+                formControlName="email"
+                type="text"
+                id="input-group-1"
+                class="border border-gray-300 text-gray-900 rounded-lg"
+                placeholder="Email"
+                appEmailValidation
+              />
+
+              <!-- validate email error -->
+              <div
+                *ngIf="loginForm.get('email')?.invalid"
+                class="mt-5 text-red-400"
+              >
+                <p
+                  *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']"
+                >
+                  Email is required.
+                </p>
+
+                <p
+                  *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['invalidEmail']"
+                >
+                  Invalid email address
+                </p>
+              </div>
+            </div>
+
+            <div class="relative mb-6 text-center">
+              <!-- <div
+                  class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none"
+                >
+                  <img src="../../../assets/images/Group.svg" alt="" />
+                </div> -->
+              <input
+                type="password"
+                formControlName="password"
+                placeholder="Password"
+                id="input-group-1"
+                class="border border-gray-300 text-gray-900 rounded-lg"
+                appPasswordValidation
+              />
+
+              <!-- password validation -->
+              <div
+                *ngIf="loginForm.get('password')?.invalid"
+                class="mt-5 text-red-400"
+              >
+                <p
+                  *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']"
+                >
+                  Password is required.
+                </p>
+
+                <p
+                  *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['invalidPassword']"
+                >
+                  Must contain at least 8 characters, one uppercase,lowercase,
+                  and one number
+                </p>
+              </div>
+            </div>
+
+            <!-- <div
+              class="w-full rounded-lg bg-btnBg text-white text-center py-1.5"
+            >
+              <button
+                type="submit"
+                (click)="logIn()"
+                *ngIf="isLogin"
+              >
+                Log in
+              </button>
+            </div> -->
+            <button
+              type="submit"
+              (click)="logIn()"
+              class="w-full rounded-lg bg-btnBg text-white text-center py-1.5"
+            >
+              Log in
+            </button>
+            <br />
+
+            <button
+              class="mt-5 w-full rounded-lg bg-red-400 text-white text-center py-1.5"
+            >
+              <a
+                href="http://localhost:9900/auth/realms/angular-project/protocol/openid-connect/auth?client_id=google-login-keycloak&redirect_uri=http://localhost:4200/home&response_type=code&scope=openid&kc_idp_hint=google"
+                >Login with google</a
+              >
+            </button> <br>
+
+            <!-- <button
+              class="w-full rounded-lg bg-btnBg text-white text-center py-1.5"
+            >
+              <a
+                href="http://localhost:9900/auth/realms/angular-project/protocol/openid-connect/auth?client_id=redo-mini-project-angular&redirect_uri=http://localhost:4200/home&response_type=code&scope=openid&kc_idp_hint=facebook"
+                >Login with facebook</a
+              >
+            </button> -->
+            <!-- 
+            <button *ngIf="isLogin" (click)="logOut()">Logout</button>
+            <button *ngIf="!isLogin" (click)="logIn()">Login</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

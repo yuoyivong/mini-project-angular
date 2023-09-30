@@ -1,0 +1,47 @@
+<div class="h-[165vh] bg-contentBg">
+  <div
+    class="bg-no-repeat w-full bg-cover h-[500px] relative"
+    style="
+      background-image: url('../../../assets/images/svg/Add\ Book\ Header.svg');
+    "
+  >
+    <div class="pt-10 pl-24 cursor-pointer">
+      <button (click)="goToHomePage()">
+        <img src="../../../assets/images/svg/Button.svg" alt="" />
+      </button>
+    </div>
+
+    <div class="bg-white h-[125vh] w-[85%] absolute z-10 top-44 left-20">
+      <div class="absolute z-20">
+        <div class="flex">
+          <img
+            class="w-72"
+            src="http://localhost:8080/images/{{ book.image }}"
+            alt=""
+          />
+          <div class="flex flex-col pt-10 space-y-2">
+            <h5
+              class="text-blueText mb-2 text-3xl tracking-tight dark:text-white"
+            >
+              {{ book.bookTitle | titlecase }}
+            </h5>
+
+            <p class="text-authorText">{{ book.author | uppercase }}</p>
+
+            <ng-container *ngFor="let category of book.categoryList">
+              <p class="font-light">{{ category.categoryName | titlecase }}</p>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- desctiption -->
+        <div class="px-20">
+          <p class="text-xl">Description</p>
+          <p class="text-justify font-light text-sm">
+            {{ book.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

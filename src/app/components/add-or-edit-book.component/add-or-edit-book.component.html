@@ -1,0 +1,133 @@
+<div class="h-[130vh]">
+  <div
+    class="bg-no-repeat w-full bg-cover h-[500px] relative"
+    style="
+      background-image: url('../../../assets/images/svg/Add\ Book\ Header.svg');
+    "
+  >
+    <div class="pt-10 pl-24">
+      <a routerLink="/">
+        <img src="../../../assets/images/svg/Button.svg" alt="" />
+      </a>
+    </div>
+    <div
+      class="bg-contentBg h-[900px] w-2/3 absolute z-10 top-44 left-64 rounded-xl"
+    >
+      <p class="capitalize text-3xl text-center pt-5">add new book</p>
+      <form [formGroup]="bookForm" (ngSubmit)="submitBook()">
+        <div class="grid grid-cols-3 mt-8">
+          <!-- upload image -->
+          <div class="col-span-1 flex justify-center items-center">
+            <!-- select file image -->
+            <div>
+              <input
+                type="file"
+                accept="image/*"
+                (change)="showPreview($event)"
+                class="file-upload"
+                #fileUplaod
+              />
+
+              <ng-template
+                [ngIf]="imageUrl && imageUrl !== ''"
+                [ngIfElse]="sampleImage"
+              >
+                <img
+                  [src]="imageUrl"
+                  [alt]="bookForm.value.name"
+                  (click)="fileUplaod.click()"
+                  class="cursor-pointer"
+                />
+              </ng-template>
+
+              <ng-template #sampleImage>
+                <img
+                  src="../../../assets/images/svg/{{ defaultImage }}"
+                  (click)="fileUplaod.click()"
+                  class="cursor-pointer"
+                />
+              </ng-template>
+            </div>
+            <!--   
+              <img
+                src="../../../assets/images/book cover/{{ defaultImage }}"
+                class="w-44 border rounded-lg ml-10"
+              /> -->
+          </div>
+
+          <div class="col-span-2 pt-1 ml-10">
+            <!-- title -->
+            <label for="title">Title </label> <br />
+            <input
+              type="text"
+              formControlName="bookTitle"
+              placeholder="Enter title"
+              class="font-light"
+              value="Title"
+            />
+            <br />
+
+            <!-- author -->
+            <label for="author">Author</label> <br />
+            <input
+              type="text"
+              formControlName="author"
+              placeholder="Enter Author Name"
+              class="font-light"
+            />
+            <br />
+
+            <!-- select category -->
+            <label for="category">Category </label> <br />
+            <div
+              class="flex items-center"
+              *ngFor="let category of bookCategory$"
+            >
+              <input type="checkbox" class="checkboxSize" />
+              <p class="pl-2">{{ category.categoryName }}</p>
+            </div>
+
+            <!-- <select formControlName="category">
+              <option value="" selected class="font-light">
+                Choose Category
+              </option>
+              <option
+                  *ngFor="let bookCategory of allBooks" 
+                >
+                  {{ bookCategory.category | titlecase }}
+                </option>
+              <option *ngFor="let category of bookCategory$ | async">
+                  {{ category | titlecase }}
+                </option>
+            </select> -->
+
+            <br />
+          </div>
+        </div>
+
+        <!-- description -->
+        <div class="px-20 pt-10">
+          <label for="description">Description </label> <br />
+          <textarea
+            type="text"
+            formControlName="description"
+            placeholder="Enter a description"
+            class="font-light"
+          ></textarea>
+          <br />
+        </div>
+
+        <div class="px-20">
+          <!-- button add -->
+          <button
+            type="submit"
+            class="mt-2 py-2 px-8 rounded-xl bg-btnYellow"
+            (click)="createBook()"
+          >
+            Create
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

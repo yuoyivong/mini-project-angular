@@ -1,0 +1,16 @@
+input {
+  border-radius: 8px;
+  border: 1px solid var(--control-jnt-control-border-color, #d0d0d0);
+  width: 400px;
+  height: 50px;
+  font-size: 0.8rem;
+  padding-left: 55px;
+}
+
+/* button {
+    height: 50px;
+  } */
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

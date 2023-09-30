@@ -1,0 +1,34 @@
+<!-- <p>home works! {{ email }}</p>
+<button (click)="logout()">Log out</button> <br />
+
+<a
+  href="http://localhost:9900/auth/realms/angular-project/protocol/openid-connect/logout?redirect_uri=http://localhost:4200/"
+  >Logout from google keycloak</a
+> -->
+
+<div class="w-full h-screen">
+  <div class="flex justify-between">
+    <div class="pt-40 pl-40">
+      <div class="uppercase text-[60px]">
+        <p>read and add</p>
+        <p>your insight</p>
+      </div>
+
+      <p class="capitalize font-light text-[25px]">
+        find your favorite book and read it here for free
+      </p>
+    </div>
+
+    <div>
+      <img src="../../../assets/images/svg/Header.svg" alt="" />
+    </div>
+  </div>
+
+  <!-- book content -->
+  <div>
+
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
