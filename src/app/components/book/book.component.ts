@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
 
@@ -8,13 +8,25 @@ import { BookService } from 'src/app/services/book.service';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css'],
 })
-export class BookComponent implements OnInit {
-  constructor(private bookService: BookService, private router: Router) {}
+export class BookComponent implements OnInit, AfterContentChecked {
+  constructor(
+    private bookService: BookService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngAfterContentChecked(): void {
+    this.activatedRoute.queryParamMap.subscribe((res) => {
+      console.log('Book id : ', res.get('id'));
+      this.deleteBookId = +res.get('id')!;
+    });
+  }
+
   booksList: Book[] | undefined;
+  deleteBookId: number = 0;
 
   ngOnInit(): void {
     this.getAllBooks();
-
   }
 
   // get all books from book service
@@ -28,7 +40,14 @@ export class BookComponent implements OnInit {
   // get specific book by its id
   getBookById(id: number) {
     console.log('Book Id : ', id);
-    this.router.navigate(['/book', id])
+    this.router.navigate(['/book', id]);
+  }
+
+  // delete book by its id
+  deleteBookById() {
+    this.bookService.deleteBookById(this.deleteBookId).subscribe((res) => {
+      console.log(res);
+    });
   }
   
 }

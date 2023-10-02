@@ -1,6 +1,6 @@
 import { Book } from "./book";
 
-export interface BookResponse {
+export interface ApiResponse {
     message : string;
     payload : Book;
     status : number;

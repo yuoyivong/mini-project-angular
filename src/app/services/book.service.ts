@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { env } from '../environment/env';
 import { Book } from '../models/book';
-import { BookResponse } from '../models/book-response';
+import { ApiResponse } from '../models/api-response';
 
 @Injectable({
   providedIn: 'root',
@@ -40,8 +40,8 @@ export class BookService {
     });
   }
 
-  getBookById(bookId: number): Observable<BookResponse> {
-    return this.http.get<BookResponse>(`${env.baseUrl}/reader/book/${bookId}`, {
+  getBookById(bookId: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${env.baseUrl}/reader/book/${bookId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },

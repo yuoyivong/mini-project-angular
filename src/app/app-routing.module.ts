@@ -40,10 +40,13 @@ const routes: Routes = [
         component: AddOrEditBookComponent,
       },
       {
+        path: 'editBook/:id',
+        component: AddOrEditBookComponent,
+      },
+      {
         path: 'bookList',
         component: BookListComponent,
       },
-
     ],
   },
 ];

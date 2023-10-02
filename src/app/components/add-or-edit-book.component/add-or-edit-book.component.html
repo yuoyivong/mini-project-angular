@@ -13,7 +13,7 @@
     <div
       class="bg-contentBg h-[900px] w-2/3 absolute z-10 top-44 left-64 rounded-xl"
     >
-      <p class="capitalize text-3xl text-center pt-5">add new book</p>
+      <p class="capitalize text-3xl text-center pt-5">{{ title }}</p>
       <form [formGroup]="bookForm" (ngSubmit)="submitBook()">
         <div class="grid grid-cols-3 mt-8">
           <!-- upload image -->
@@ -79,12 +79,22 @@
 
             <!-- select category -->
             <label for="category">Category </label> <br />
-            <div
-              class="flex items-center"
-              *ngFor="let category of bookCategory$"
-            >
-              <input type="checkbox" class="checkboxSize" />
-              <p class="pl-2">{{ category.categoryName }}</p>
+            <div>
+              <div
+                class="flex items-center"
+                *ngFor="
+                  let category of bookCategory$ | filterUniqueCategory;
+                  let i = index
+                "
+              >
+                <input
+                  type="checkbox"
+                  class="checkboxSize"
+                  [value]="category.categoryId"
+                  (change)="handleMultipleCategoriesCheck($event)"
+                />
+                <p class="pl-2">{{ category.categoryName }}</p>
+              </div>
             </div>
 
             <!-- <select formControlName="category">
@@ -119,12 +129,8 @@
 
         <div class="px-20">
           <!-- button add -->
-          <button
-            type="submit"
-            class="mt-2 py-2 px-8 rounded-xl bg-btnYellow"
-            (click)="createBook()"
-          >
-            Create
+          <button type="submit" class="mt-2 py-2 px-8 rounded-xl bg-btnYellow">
+            Save Book
           </button>
         </div>
       </form>
