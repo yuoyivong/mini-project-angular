@@ -82,6 +82,7 @@ export class AddOrEditBookComponent implements OnInit {
             book$.map(
               (res) => {
                 console.log(res.categoryList);
+                this.bookCategory$?.concat(...res.categoryList)
                 this.bookCategory$ = [...res.categoryList];
               }
 
