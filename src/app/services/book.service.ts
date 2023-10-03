@@ -57,6 +57,8 @@ export class BookService {
   }
 
   updateBookById(bookId: number, book: any): Observable<Book> {
+    console.log('Book id : ', bookId);
+
     return this.http.put<Book>(`${env.baseUrl}/book/${bookId}`, book, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -66,6 +68,14 @@ export class BookService {
 
   deleteBookById(bookId: number): Observable<any> {
     return this.http.delete(`${env.baseUrl}/book/${bookId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  }
+
+  getBookByCategoryId(categoryId: number): Observable<Book[]> {
+    return this.http.get<Book[]>(`${env.baseUrl}/reader/books/${categoryId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },

@@ -24,8 +24,10 @@ export class AddOrEditBookComponent implements OnInit {
   defaultImage = 'Rich People Problem.svg';
   bookCategory$: Category[] = [];
   id: number | null | undefined;
-  submiited = false;
   title: string = '';
+  tempBook!: Book;
+  isUpdatedImage: boolean = false;
+  bookCate$: number[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,9 +49,12 @@ export class AddOrEditBookComponent implements OnInit {
       image: ['', Validators.required],
     });
 
+    console.log('Book Form Details : ', this.bookForm);
+
     this.getAllCategories();
 
     this.title = 'Add New Book';
+
     if (this.id) {
       // edit mode
       this.title = 'Edit Existing Book';
@@ -57,15 +62,24 @@ export class AddOrEditBookComponent implements OnInit {
         .getBookById(this.id)
         .pipe(first())
         .subscribe((item) => {
-          console.log("Data : ", item);
-          
-          this.bookForm.patchValue(item);
+          console.log('Data : ', item.payload);
+
+          this.tempBook = item.payload;
+          this.bookCate$ = item.payload.categoryList.map(
+            (cat) => cat.categoryId
+          );
+
+          this.bookForm.patchValue(item.payload);
+
+          console.log('Book category : ', this.bookCate$);
         });
     }
   }
 
   // image preview
   showPreview(event: any) {
+    this.isUpdatedImage = true;
+
     const file = (event.target as HTMLInputElement).files?.[0];
     this.bookForm.patchValue({
       image: file,
@@ -84,10 +98,7 @@ export class AddOrEditBookComponent implements OnInit {
   }
 
   submitBook() {
-    console.log('Submitted');
-
-    this.submiited = true;
-
+    console.log(this.bookForm.value);
     this.saveBook();
   }
 
@@ -129,11 +140,50 @@ export class AddOrEditBookComponent implements OnInit {
     }
   }
 
+  // update book by specific book id
+  async updatedBookById() {
+    try {
+      if (this.isUpdatedImage) {
+        let updatedBookData = {
+          ...this.bookForm.value,
+          image: (await this.fileUpload()) ?? this.bookForm.value.image,
+        };
+
+        const updatedBook = await this.bookService
+          .updateBookById(this.id!, updatedBookData)
+          .toPromise();
+        console.log('Updated Book : ', updatedBook);
+      } else {
+        let currentCategory = {
+          ...this.bookForm.value,
+          categoryId: this.summaryCategories,
+        };
+        console.log('Category : ', currentCategory);
+
+        this.bookService
+          .updateBookById(this.id!, currentCategory)
+          .subscribe((res) => console.log("Image isn't changed : ", res));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // get existing categories and concat with the new categories
+  get summaryCategories() {
+    let categoryId = this.bookForm.value.categoryId;
+    console.log('Category null or not? : ', categoryId);
+    if (categoryId.length == 0) {
+      categoryId = this.bookCate$;
+    } else {
+      categoryId = this.bookCate$.concat(categoryId);
+    }
+    return categoryId;
+  }
+
   // update existing book
   private saveBook() {
-    return this.id
-      ? this.bookService.updateBookById(this.id, this.bookForm.value)
-      : this.createBook();
+    return this.id ? this.updatedBookById() : this.createBook();
   }
 
   // get all categories from services
@@ -161,16 +211,23 @@ export class AddOrEditBookComponent implements OnInit {
   }
 
   handleMultipleCategoriesCheck(e: any) {
+    console.log('Event : ', e);
+
     const checkCategory: FormArray = this.bookForm.get(
       'categoryId'
     ) as FormArray;
     if (e.target.checked) {
       checkCategory.push(new FormControl(parseInt(e.target.value)));
-      console.log('Type of check box value : ', typeof e.target.value);
     } else {
+      console.log('Checked false : ', e.target.checked);
+      console.log('Checked value : ', e.target.value);
+      this.bookCate$ = this.bookCate$.filter((id) => id != e.target.value);
+      console.log(this.bookCate$);
+
       let i: number = 0;
       checkCategory.controls.forEach((item: any) => {
         if (item.value == e.target.value) {
+          console.log('Item : ', item.value);
           checkCategory.removeAt(i);
           return;
         }

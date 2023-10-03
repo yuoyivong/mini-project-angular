@@ -41,11 +41,21 @@
               </ng-template>
 
               <ng-template #sampleImage>
-                <img
-                  src="../../../assets/images/svg/{{ defaultImage }}"
-                  (click)="fileUplaod.click()"
-                  class="cursor-pointer"
-                />
+                <ng-container *ngIf="!tempBook">
+                  <img
+                    src="../../../assets/images/svg/{{ defaultImage }}"
+                    (click)="fileUplaod.click()"
+                    class="cursor-pointer"
+                  />
+                </ng-container>
+
+                <ng-container *ngIf="tempBook">
+                  <img
+                    src="http://localhost:8080/images/{{ tempBook.image }}"
+                    (click)="fileUplaod.click()"
+                    class="cursor-pointer"
+                  />
+                </ng-container>
               </ng-template>
             </div>
             <!--   
@@ -61,9 +71,8 @@
             <input
               type="text"
               formControlName="bookTitle"
-              placeholder="Enter title"
+              placeholder="Enter Title"
               class="font-light"
-              value="Title"
             />
             <br />
 
@@ -92,6 +101,7 @@
                   class="checkboxSize"
                   [value]="category.categoryId"
                   (change)="handleMultipleCategoriesCheck($event)"
+                  [checked]="bookCate$.includes(category.categoryId)"
                 />
                 <p class="pl-2">{{ category.categoryName }}</p>
               </div>
@@ -121,7 +131,7 @@
           <textarea
             type="text"
             formControlName="description"
-            placeholder="Enter a description"
+            [placeholder]="tempBook?.description ?? 'Enter a description'"
             class="font-light"
           ></textarea>
           <br />
@@ -129,8 +139,19 @@
 
         <div class="px-20">
           <!-- button add -->
-          <button type="submit" class="mt-2 py-2 px-8 rounded-xl bg-btnYellow">
-            Save Book
+          <button
+            type="submit"
+            class="mt-2 py-2 px-8 rounded-xl bg-btnYellow"
+            *ngIf="!tempBook"
+          >
+            Create New Book
+          </button>
+          <button
+            type="submit"
+            class="mt-2 py-2 px-8 rounded-xl bg-btnBg text-white"
+            *ngIf="tempBook"
+          >
+            Update Book
           </button>
         </div>
       </form>

@@ -1,4 +1,9 @@
-import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewChecked,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
@@ -8,24 +13,37 @@ import { BookService } from 'src/app/services/book.service';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css'],
 })
-export class BookComponent implements OnInit, AfterContentChecked {
+export class BookComponent
+  implements OnInit, AfterContentChecked, AfterViewChecked
+{
+  booksList: Book[] | undefined;
+  deleteBookId: number = 0;
+  categoryId: number = 0;
+
   constructor(
     private bookService: BookService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
 
+  ngAfterViewChecked(): void {
+    // throw new Error('Method not implemented.');
+    // this.getBookByCategoryId();
+  }
+
   ngAfterContentChecked(): void {
     this.activatedRoute.queryParamMap.subscribe((res) => {
-      console.log('Book id : ', res.get('id'));
+      console.log('Book id on url : ', res.get('id'));
       this.deleteBookId = +res.get('id')!;
     });
   }
 
-  booksList: Book[] | undefined;
-  deleteBookId: number = 0;
-
   ngOnInit(): void {
+    this.activatedRoute.queryParamMap.subscribe((res) => {
+      console.log('Get book by category id : ', res.get('categoryId'));
+      this.categoryId = +res.get('categoryId')!;
+    });
+
     this.getAllBooks();
   }
 
@@ -49,5 +67,11 @@ export class BookComponent implements OnInit, AfterContentChecked {
       console.log(res);
     });
   }
-  
+
+  // get book by categoryId
+  getBookByCategoryId() {
+    this.bookService.getBookByCategoryId(this.categoryId).subscribe((res) => {
+      console.log('Get book by category id response : ', res);
+    });
+  }
 }

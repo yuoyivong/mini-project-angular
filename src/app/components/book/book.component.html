@@ -1,64 +1,58 @@
 <!-- content body -->
-<div class="bg-contentBg h-[150vh] relative">
-  <div
-    class="bg-white h-[130vh] w-[80%] absolute z-10 top-16 left-36 rounded-lg shadow-md"
-  >
-    <p class="mt-5 text-2xl capitalize text-center">
-      new interesting story books
-    </p>
-    <!-- loop books and show them on the template -->
-    <div class="mt-5 grid grid-cols-2 gap-8 mx-10">
-      <div *ngFor="let book of booksList">
-        <a
-          class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100"
-        >
-          <img
-            class="object-cover w-1/3 rounded-t-lg h-96 md:h-auto md:rounded-none md:rounded-l-lg"
-            src="http://localhost:8080/images/{{ book.image }}"
-            alt=""
-          />
+<div class="">
+  <!-- <button (click)="getBookByCategoryId(7)">Get book</button> -->
+  <!-- loop books and show them on the template -->
+  <div class="mt-5 grid grid-cols-2 gap-8">
+    <div *ngFor="let book of booksList">
+      <a
+        class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100"
+      >
+        <img
+          class="object-cover w-1/3 rounded-t-lg h-96 md:h-auto md:rounded-none md:rounded-l-lg"
+          src="http://localhost:8080/images/{{ book.image }}"
+          alt=""
+        />
 
-          <div class="flex flex-col justify-between p-4 leading-normal w-2/3">
-            <h5 class="text-blueText truncate mb-2 text-2xl tracking-tight">
-              {{ book.bookTitle | titlecase }}
-            </h5>
+        <div class="flex flex-col justify-between p-4 leading-normal w-2/3">
+          <h5 class="text-blueText truncate mb-2 text-2xl tracking-tight">
+            {{ book.bookTitle | titlecase }}
+          </h5>
 
-            <p class="text-authorText truncate">
-              {{ book.author | uppercase }}
-            </p>
+          <p class="text-authorText truncate">
+            {{ book.author | uppercase }}
+          </p>
 
-            <p class="line-clamp-3 mb-3 font-light text-gray-700">
-              {{ book.description }}
-            </p>
-            <div class="font-light text-blueText">
-              <!-- button view details -->
-              <button
-                (click)="getBookById(book.book_id)"
-                class="mr-2 rounded-lg border border-readNowBorder py-1.5 px-5 text-yellow-500 hover:bg-yellow-100"
+          <p class="line-clamp-3 mb-3 font-light text-gray-700">
+            {{ book.description }}
+          </p>
+          <div class="font-light text-blueText">
+            <!-- button view details -->
+            <button
+              (click)="getBookById(book.book_id)"
+              class="rounded-lg border border-readNowBorder py-1.5 px-5 text-yellow-500 hover:bg-yellow-100"
+            >
+              View
+            </button>
+
+            <!-- button edit book by id -->
+            <button
+              class="rounded-lg border border-blue-600 py-1.5 px-5 mx-3 hover:bg-blue-100"
+            >
+              <a [routerLink]="['/editBook', book.book_id]">Edit</a>
+            </button>
+
+            <!-- button delete book by id -->
+            <button
+              onclick="my_modal_1.showModal()"
+              class="rounded-lg border border-red-600 py-1.5 px-5 text-red-500 hover:bg-red-100"
+            >
+              <a routerLink="/book" [queryParams]="{ id: book.book_id }">
+                Delete</a
               >
-                View
-              </button>
-
-              <!-- button edit book by id -->
-              <button
-                class="rounded-lg border border-blue-600 py-1.5 px-5 mx-3 hover:bg-blue-100"
-              >
-                <a [routerLink]="['/editBook', book.book_id]">Edit</a>
-              </button>
-
-              <!-- button delete book by id -->
-              <button
-                onclick="my_modal_1.showModal()"
-                class="rounded-lg border border-red-600 py-1.5 px-5 text-red-500 hover:bg-red-100"
-              >
-                <a routerLink="/book" [queryParams]="{ id: book.book_id }">
-                  Delete</a
-                >
-              </button>
-            </div>
+            </button>
           </div>
-        </a>
-      </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>

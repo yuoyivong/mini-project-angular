@@ -19,6 +19,7 @@ import { ViewBookDetailsComponent } from './components/view-book-details/view-bo
 import { BookListComponent } from './components/book-list/book-list.component';
 import { AddOrEditBookComponent } from './components/add-or-edit-book.component/add-or-edit-book.component';
 import { FilterUniqueCategoryPipe } from './pipes/filter-unique-category.pipe';
+import { SearchPipe } from './pipes/search.pipe';
 
 function initailizeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -72,6 +73,7 @@ function initailizeKeyCloakGoogle(keycloakGoogle: KeycloakService) {
     AddOrEditBookComponent,
     BookListComponent,
     FilterUniqueCategoryPipe,
+    SearchPipe,
   ],
   imports: [
     KeycloakAngularModule,
