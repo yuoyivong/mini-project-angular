@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/models/book';
-import { BookResponse } from 'src/app/models/book-response';
+import { ApiResponse } from 'src/app/models/api-response';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({

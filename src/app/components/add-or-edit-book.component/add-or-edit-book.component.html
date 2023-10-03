@@ -13,7 +13,7 @@
     <div
       class="bg-contentBg h-[900px] w-2/3 absolute z-10 top-44 left-64 rounded-xl"
     >
-      <p class="capitalize text-3xl text-center pt-5">add new book</p>
+      <p class="capitalize text-3xl text-center pt-5">{{ title }}</p>
       <form [formGroup]="bookForm" (ngSubmit)="submitBook()">
         <div class="grid grid-cols-3 mt-8">
           <!-- upload image -->
@@ -41,11 +41,21 @@
               </ng-template>
 
               <ng-template #sampleImage>
-                <img
-                  src="../../../assets/images/svg/{{ defaultImage }}"
-                  (click)="fileUplaod.click()"
-                  class="cursor-pointer"
-                />
+                <ng-container *ngIf="!tempBook">
+                  <img
+                    src="../../../assets/images/svg/{{ defaultImage }}"
+                    (click)="fileUplaod.click()"
+                    class="cursor-pointer"
+                  />
+                </ng-container>
+
+                <ng-container *ngIf="tempBook">
+                  <img
+                    src="http://localhost:8080/images/{{ tempBook.image }}"
+                    (click)="fileUplaod.click()"
+                    class="cursor-pointer"
+                  />
+                </ng-container>
               </ng-template>
             </div>
             <!--   
@@ -61,9 +71,8 @@
             <input
               type="text"
               formControlName="bookTitle"
-              placeholder="Enter title"
+              placeholder="Enter Title"
               class="font-light"
-              value="Title"
             />
             <br />
 
@@ -79,12 +88,23 @@
 
             <!-- select category -->
             <label for="category">Category </label> <br />
-            <div
-              class="flex items-center"
-              *ngFor="let category of bookCategory$"
-            >
-              <input type="checkbox" class="checkboxSize" />
-              <p class="pl-2">{{ category.categoryName }}</p>
+            <div>
+              <div
+                class="flex items-center"
+                *ngFor="
+                  let category of bookCategory$ | filterUniqueCategory;
+                  let i = index
+                "
+              >
+                <input
+                  type="checkbox"
+                  class="checkboxSize"
+                  [value]="category.categoryId"
+                  (change)="handleMultipleCategoriesCheck($event)"
+                  [checked]="bookCate$.includes(category.categoryId)"
+                />
+                <p class="pl-2">{{ category.categoryName }}</p>
+              </div>
             </div>
 
             <!-- <select formControlName="category">
@@ -111,7 +131,7 @@
           <textarea
             type="text"
             formControlName="description"
-            placeholder="Enter a description"
+            [placeholder]="tempBook?.description ?? 'Enter a description'"
             class="font-light"
           ></textarea>
           <br />
@@ -122,9 +142,16 @@
           <button
             type="submit"
             class="mt-2 py-2 px-8 rounded-xl bg-btnYellow"
-            (click)="createBook()"
+            *ngIf="!tempBook"
           >
-            Create
+            Create New Book
+          </button>
+          <button
+            type="submit"
+            class="mt-2 py-2 px-8 rounded-xl bg-btnBg text-white"
+            *ngIf="tempBook"
+          >
+            Update Book
           </button>
         </div>
       </form>
