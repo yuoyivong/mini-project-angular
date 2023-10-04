@@ -4,11 +4,11 @@
   >
     <!-- image -->
     <div class="col-span-1 h-full bg-blueBg rounded-l-lg">
-      <div class="text-white uppercase p-10 text-xl">mybook</div>
+      <div class="text-white uppercase p-10 text-3xl">mybook</div>
       <div class="text-white flex flex-col items-center">
         <img src="../../../assets/images/svg/Artboard 15@2x 1.svg" />
-        <p class="text-lg">Welcome to MYBOOK</p>
-        <p class="text-sm">There is no friend as loyal as a book.</p>
+        <p class="text-2xl">Welcome to MYBOOK</p>
+        <p class="text-lg">There is no friend as loyal as a book.</p>
       </div>
     </div>
 
@@ -105,20 +105,21 @@
             <button
               type="submit"
               (click)="logIn()"
-              class="w-full rounded-lg bg-btnBg text-white text-center py-1.5"
+              class="w-full rounded-lg bg-btnBg text-white text-center py-2"
             >
-              Log in
+              <p>Log in</p>
             </button>
             <br />
 
             <button
-              class="mt-5 w-full rounded-lg bg-red-400 text-white text-center py-1.5"
+              class="mt-5 w-full rounded-lg bg-red-400 text-white text-center py-2"
             >
               <a
                 href="http://localhost:9900/auth/realms/angular-project/protocol/openid-connect/auth?client_id=google-login-keycloak&redirect_uri=http://localhost:4200/home&response_type=code&scope=openid&kc_idp_hint=google"
-                >Login with google</a
+                ><p>Login with google</p></a
               >
-            </button> <br>
+            </button>
+            <br />
 
             <!-- <button
               class="w-full rounded-lg bg-btnBg text-white text-center py-1.5"

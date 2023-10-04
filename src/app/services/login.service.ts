@@ -7,9 +7,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(
-    private http: HttpClient,
-  ) {}
+  role: string = '';
+  isLogin = false;
+
+  constructor(private http: HttpClient) {}
 
   public login(email: string, password: string): Observable<any> {
     console.log('Email : ', email);
@@ -39,7 +40,13 @@ export class LoginService {
   }
 
   public getIsLoggedIn(): boolean {
-    return localStorage.getItem('token') != null;
+    const loggedIn = localStorage.getItem('token');
+    if (loggedIn != null) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
+    return this.isLogin;
   }
 
   public getEmail() {
@@ -50,9 +57,14 @@ export class LoginService {
       const paylaodDecoded = JSON.parse(payloadDecodedJson);
       console.log(paylaodDecoded);
       console.log(paylaodDecoded.roles[0].authority);
-      
+      localStorage.setItem('ROLE', paylaodDecoded.roles[0].authority);
+
       return paylaodDecoded.preferred_username ?? paylaodDecoded.sub;
     }
   }
 
+  public getRole() {
+    this.role = localStorage.getItem('ROLE')!;
+    return this.role;
+  }
 }

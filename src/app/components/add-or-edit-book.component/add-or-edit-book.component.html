@@ -6,14 +6,14 @@
     "
   >
     <div class="pt-10 pl-24">
-      <a routerLink="/">
+      <a routerLink="/bookList">
         <img src="../../../assets/images/svg/Button.svg" alt="" />
       </a>
     </div>
     <div
-      class="bg-contentBg h-[900px] w-2/3 absolute z-10 top-44 left-64 rounded-xl"
+      class="bg-contentBg w-2/3 absolute z-10 top-44 left-[300px] rounded-xl pb-10"
     >
-      <p class="capitalize text-3xl text-center pt-5">{{ title }}</p>
+      <p class="capitalize text-3xl text-center pt-10">{{ title }}</p>
       <form [formGroup]="bookForm" (ngSubmit)="submitBook()">
         <div class="grid grid-cols-3 mt-8">
           <!-- upload image -->
@@ -65,16 +65,28 @@
               /> -->
           </div>
 
-          <div class="col-span-2 pt-1 ml-10">
+          <div class="col-span-2 ml-10">
             <!-- title -->
             <label for="title">Title </label> <br />
             <input
               type="text"
               formControlName="bookTitle"
               placeholder="Enter Title"
-              class="font-light"
+              class="font-light capitalize mb-3 focus:outline-none focus:border-blue-500"
             />
             <br />
+
+            <div *ngIf="form['bookTitle'].invalid">
+              <p
+                class="mb-3 text-red-500 text-lg"
+                *ngIf="
+                  form['bookTitle'].touched &&
+                  bookForm.get('bookTitle')?.errors?.['required']
+                "
+              >
+                Book Title is required
+              </p>
+            </div>
 
             <!-- author -->
             <label for="author">Author</label> <br />
@@ -82,13 +94,25 @@
               type="text"
               formControlName="author"
               placeholder="Enter Author Name"
-              class="font-light"
+              class="font-light capitalize mb-3 focus:outline-none focus:border-blue-500"
             />
             <br />
 
+            <div *ngIf="form['author'].invalid">
+              <p
+                class="mb-3 text-red-500 text-lg"
+                *ngIf="
+                  form['author'].touched &&
+                  bookForm.get('author')?.errors?.['required']
+                "
+              >
+                Author is required
+              </p>
+            </div>
+
             <!-- select category -->
             <label for="category">Category </label> <br />
-            <div>
+            <div class="grid grid-cols-3">
               <div
                 class="flex items-center"
                 *ngFor="
@@ -103,7 +127,9 @@
                   (change)="handleMultipleCategoriesCheck($event)"
                   [checked]="bookCate$.includes(category.categoryId)"
                 />
-                <p class="pl-2">{{ category.categoryName }}</p>
+                <p class="pl-2 capitalize text-xl font-light py-1">
+                  {{ category.categoryName }}
+                </p>
               </div>
             </div>
 
@@ -126,29 +152,43 @@
         </div>
 
         <!-- description -->
-        <div class="px-20 pt-10">
+        <div class="px-20">
           <label for="description">Description </label> <br />
           <textarea
             type="text"
             formControlName="description"
-            [placeholder]="tempBook?.description ?? 'Enter a description'"
+            placeholder="Enter a description"
             class="font-light"
           ></textarea>
           <br />
+
+          <div *ngIf="form['description'].invalid">
+            <p
+              class="mb-3 text-red-500 text-lg"
+              *ngIf="
+                form['description'].touched &&
+                bookForm.get('description')?.errors?.['required']
+              "
+            >
+              Description is required
+            </p>
+          </div>
         </div>
 
         <div class="px-20">
           <!-- button add -->
           <button
+            [disabled]="bookForm.invalid"
             type="submit"
-            class="mt-2 py-2 px-8 rounded-xl bg-btnYellow"
+            class="text-lg mt-2 py-2 px-8 rounded-xl bg-btnYellow"
             *ngIf="!tempBook"
           >
             Create New Book
           </button>
+
           <button
             type="submit"
-            class="mt-2 py-2 px-8 rounded-xl bg-btnBg text-white"
+            class="text-lg mt-2 py-2 px-8 rounded-xl bg-btnBg text-white"
             *ngIf="tempBook"
           >
             Update Book

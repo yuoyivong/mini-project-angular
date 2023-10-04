@@ -29,12 +29,11 @@ export class ViewBookDetailsComponent implements OnInit {
   getBookById() {
     this.bookService.getBookById(this.bookId).subscribe((res) => {
       console.log("Book details : ", res.payload);
-
       this.book = res.payload;
     });
   }
 
   goToHomePage() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/bookList']);
   }
 }

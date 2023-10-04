@@ -1,0 +1,12 @@
+a,
+input {
+  font-size: 20px;
+}
+
+.active {
+  padding: 8px 30px;
+  /* border-radius: 10px; */
+  border-left: 2px solid #ffca42;
+  color: #ffca42;
+  background-color: white;
+}

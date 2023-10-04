@@ -6,6 +6,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DoCheck,
   Input,
   OnInit,
 } from '@angular/core';
@@ -17,11 +18,8 @@ import { BookService } from 'src/app/services/book.service';
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookComponent
-  implements OnInit, AfterContentChecked, AfterViewChecked
-{
+export class BookComponent implements OnInit {
   booksList: Book[] | undefined;
   deleteBookId: number = 0;
   categoryId: number | undefined;
@@ -29,39 +27,21 @@ export class BookComponent
   constructor(
     private bookService: BookService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private changeDetectorRef: ChangeDetectorRef
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    console.log(' Hello onint');
-
-    this.getAllBooks();
-    // if (!this.categoryId) {
-    //   this.getAllBooks();
-    // } else {
-    //   this.getBookByCategoryId();
-    // }
-  }
-
-  ngAfterViewChecked(): void {
-    // this.getBookByCategoryId();
-    // if (this.categoryId) {
-    //   this.getBookByCategoryId();
-    // }
-    // this.categoryId = +this.activatedRoute.snapshot.paramMap.get('categoryId')!;
-    console.log("Category : ", this.categoryId);
-
-    this.getBookByCategoryId();
-    this.changeDetectorRef.detectChanges();
-  }
-
-  ngAfterContentChecked(): void {
     this.activatedRoute.queryParamMap.subscribe((res) => {
       console.log('Book id on url : ', res.get('id'));
       console.log('Category id : ', res.get('categoryId'));
       this.deleteBookId = +res.get('id')!;
       this.categoryId = +res.get('categoryId')!;
+
+      this.getBookByCategoryId();
+
+      if (!this.categoryId) {
+        this.getAllBooks();
+      }
     });
   }
 
@@ -88,9 +68,11 @@ export class BookComponent
 
   // // get book by categoryId
   getBookByCategoryId() {
-    this.bookService.getBookByCategoryId(this.categoryId!).subscribe((res) => {
-      console.log('Get book by category id response : ', res);
-      this.booksList = res;
-    });
+    if (this.categoryId) {
+      this.bookService.getBookByCategoryId(this.categoryId).subscribe((res) => {
+        console.log('Get book by category id response : ', res);
+        this.booksList = res;
+      });
+    }
   }
 }

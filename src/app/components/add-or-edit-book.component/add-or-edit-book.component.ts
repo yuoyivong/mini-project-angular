@@ -76,6 +76,11 @@ export class AddOrEditBookComponent implements OnInit {
     }
   }
 
+  // form validation control
+  get form() {
+    return this.bookForm.controls;
+  }
+
   // image preview
   showPreview(event: any) {
     this.isUpdatedImage = true;
