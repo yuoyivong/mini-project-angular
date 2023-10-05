@@ -3,23 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RadioValidatorPipe } from './pipes/radio-validator.pipe';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
-import { HomeComponent } from './components/home/home.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { BookComponent } from './components/book/book.component';
-import { ViewBookDetailsComponent } from './components/view-book-details/view-book-details.component';
-
-import { BookListComponent } from './components/book-list/book-list.component';
-import { AddOrEditBookComponent } from './components/add-or-edit-book.component/add-or-edit-book.component';
-import { FilterUniqueCategoryPipe } from './pipes/filter-unique-category.pipe';
-import { SearchPipe } from './pipes/search.pipe';
 
 function initailizeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -60,21 +48,7 @@ function initailizeKeyCloakGoogle(keycloakGoogle: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RegisterComponent,
-    LoginComponent,
-    RadioValidatorPipe,
-    HomeComponent,
-    NavbarComponent,
-    FooterComponent,
-    BookComponent,
-    ViewBookDetailsComponent,
-    AddOrEditBookComponent,
-    BookListComponent,
-    FilterUniqueCategoryPipe,
-    SearchPipe,
-  ],
+  declarations: [AppComponent, RadioValidatorPipe],
   imports: [
     KeycloakAngularModule,
     BrowserModule,
@@ -85,13 +59,13 @@ function initailizeKeyCloakGoogle(keycloakGoogle: KeycloakService) {
   ],
   providers: [
     {
-      provide: "KEYCLOAK WITH PASSWORD GRANT TYPE",
+      provide: 'KEYCLOAK WITH PASSWORD GRANT TYPE',
       useFactory: initailizeKeycloak,
       multi: true,
       deps: [KeycloakService],
     },
     {
-      provide: "KEYCLOAK WITH AUTHORIZATION CODE GRANT TYPE",
+      provide: 'KEYCLOAK WITH AUTHORIZATION CODE GRANT TYPE',
       useFactory: initailizeKeyCloakGoogle,
       multi: true,
       deps: [KeycloakService],

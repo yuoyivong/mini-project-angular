@@ -35,6 +35,8 @@ export class BookListComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit(): void {
+    console.log("Hello");
+    
     this.getAllCategories();
     // this.activatedRoute.queryParamMap.subscribe((res) => {
     //   this.categoryId$ = +res.get('categoryId')!;

@@ -11,6 +11,14 @@ export class NavbarComponent {
   showHeader: boolean = true;
   showAuthButton: boolean = true;
 
+  isToggle: boolean = false;
+
+  setIsToggle() {
+    console.log('Is toggle : ', this.isToggle);
+
+    this.isToggle = !this.isToggle;
+  }
+
   constructor(private router: Router) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {

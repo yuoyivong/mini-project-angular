@@ -10,7 +10,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
 
@@ -43,6 +43,10 @@ export class BookComponent implements OnInit {
         this.getAllBooks();
       }
     });
+
+    // this.currentPath = this.activatedRoute.snapshot.url
+    //   .map((segment) => segment.path)
+    //   .join('/');
   }
 
   // get all books from book service
@@ -73,6 +77,22 @@ export class BookComponent implements OnInit {
         console.log('Get book by category id response : ', res);
         this.booksList = res;
       });
+    }
+  }
+
+  // set query param to url based on the current route
+  setQueryParams(bookId: number) {
+    console.log('Book id : ', bookId);
+    const path = this.activatedRoute.snapshot.url
+      .map((segment) => segment.path)
+      .join('/');
+    console.log('Current path : ', path);
+
+    if (path === 'book') {
+
+      this.router.navigate(['/book'], { queryParams: { id: bookId } });
+    } else if (path === 'bookList') {
+      this.router.navigate(['/bookList'], { queryParams: { id: bookId } });
     }
   }
 }

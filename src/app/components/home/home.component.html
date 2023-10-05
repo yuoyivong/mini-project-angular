@@ -8,28 +8,28 @@
 
 <div class="w-full h-screen">
   <div class="flex justify-between">
-    <div class="pt-40 pl-40">
-      <div class="uppercase text-[60px]">
+    <div class="lg:pt-40 lg:pl-40">
+      <div class="uppercase text-[60px] hidden lg:block">
         <p>read and add</p>
         <p>your insight</p>
       </div>
 
-      <p class="capitalize font-light text-[25px]">
+      <p class="capitalize font-light lg:text-[25px] hidden lg:block">
         find your favorite book and read it here for free
       </p>
     </div>
 
-    <div>
+    <div class="hidden md:block">
       <img src="../../../assets/images/svg/Header.svg" alt="" />
     </div>
   </div>
 
   <!-- book content -->
-  <div class="">
-    <div class="bg-contentBg pt-5">
-      <div class="mx-auto w-[80%] rounded-lg shadow-lg px-20 pb-10">
+  <div class="pt-12 lg:pt-0">
+    <div class="bg-contentBg lg:pt-5">
+      <div class="mx-auto lg:w-[80%] lg:rounded-lg lg:shadow-lg lg:px-20 pb-10">
         <div>
-          <p class="mt-5 pt-5 text-4xl capitalize text-center">
+          <p class="mt-5 pt-5 text-lg lg:text-4xl capitalize text-center">
             new interesting story books
           </p>
           <div>
@@ -38,5 +38,7 @@
         </div>
       </div>
     </div>
+
+    <app-footer></app-footer>
   </div>
 </div>
