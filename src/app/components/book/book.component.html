@@ -61,6 +61,23 @@
     </div>
 
     <!-- <ngx-pagination [totalItems]></ngx-pagination> -->
+    <div>
+      <ul *ngIf="currentPage > 1">
+        <li>
+          <a (click)="prevPage()" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul *ngIf="currentPage < booksList?.length! / pageSize">
+        <li>
+          <a (click)="nextPage()" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

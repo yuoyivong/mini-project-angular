@@ -35,6 +35,19 @@ export class BookComponent implements OnInit, OnDestroy {
     return this.booksList?.slice(start, end);
   }
 
+  getPageSize() {
+    return this.booksList?.length! / this.pageSize;
+  }
+  // decrease pagination
+  prevPage() {
+    return this.currentPage--;
+  }
+
+  // next page
+  nextPage() {
+    return this.currentPage++;
+  }
+
   constructor(
     private bookService: BookService,
     private router: Router,
