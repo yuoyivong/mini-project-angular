@@ -1,4 +1,4 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RadioValidatorPipe } from './pipes/radio-validator.pipe';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
-import { OAuthModule } from 'angular-oauth2-oidc';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 function initailizeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -55,7 +55,7 @@ function initailizeKeyCloakGoogle(keycloakGoogle: KeycloakService) {
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    OAuthModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [
     {

@@ -8,6 +8,7 @@ import {
   Component,
   DoCheck,
   Input,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -19,16 +20,30 @@ import { BookService } from 'src/app/services/book.service';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css'],
 })
-export class BookComponent implements OnInit {
+export class BookComponent implements OnInit, OnDestroy {
   booksList: Book[] | undefined;
   deleteBookId: number = 0;
   categoryId: number | undefined;
+
+  // pagination
+  currentPage: number = 1;
+  pageSize: number = 4;
+
+  getPaginatedBook() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    return this.booksList?.slice(start, end);
+  }
 
   constructor(
     private bookService: BookService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
+
+  ngOnDestroy(): void {
+    console.log();
+  }
 
   ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe((res) => {
@@ -89,7 +104,6 @@ export class BookComponent implements OnInit {
     console.log('Current path : ', path);
 
     if (path === 'book') {
-
       this.router.navigate(['/book'], { queryParams: { id: bookId } });
     } else if (path === 'bookList') {
       this.router.navigate(['/bookList'], { queryParams: { id: bookId } });

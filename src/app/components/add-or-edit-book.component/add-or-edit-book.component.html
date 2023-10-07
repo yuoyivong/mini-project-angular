@@ -1,23 +1,25 @@
-<div class="h-[130vh]">
+<div class="lg:h-[130vh] h-auto">
   <div
-    class="bg-no-repeat w-full bg-cover h-[500px] relative"
+    class="bg-no-repeat w-full bg-cover lg:h-[500px] relative"
     style="
       background-image: url('../../../assets/images/svg/Add\ Book\ Header.svg');
     "
   >
-    <div class="pt-10 pl-24">
+    <div class="py-5 md:w-full md:pl-10 lg:pt-10 lg:pl-24 w-10 lg:py-0">
       <a routerLink="/bookList">
         <img src="../../../assets/images/svg/Button.svg" alt="" />
       </a>
     </div>
     <div
-      class="bg-contentBg w-2/3 absolute z-10 top-44 left-[300px] rounded-xl pb-10"
+      class="bg-contentBg md:mt-12 md:mx-auto md:w-[80%] lg:w-2/3 lg:absolute lg:z-10 lg:top-44 lg:left-[300px] rounded-xl pb-10"
     >
-      <p class="capitalize text-3xl text-center pt-10">{{ title }}</p>
+      <p class="capitalize text-2xl md:text-3xl lg:text-4xl text-center pt-5 lg:pt-10">
+        {{ title }}
+      </p>
       <form [formGroup]="bookForm" (ngSubmit)="submitBook()">
-        <div class="grid grid-cols-3 mt-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 lg:mt-8">
           <!-- upload image -->
-          <div class="col-span-1 flex justify-center items-center">
+          <div class="lg:col-span-1 flex justify-center items-center">
             <!-- select file image -->
             <div>
               <input
@@ -65,20 +67,20 @@
               /> -->
           </div>
 
-          <div class="col-span-2 ml-10">
+          <div class="mx-5 lg:col-span-2 lg:ml-10">
             <!-- title -->
-            <label for="title">Title </label> <br />
+            <label for="title" class="text-xl lg:text-2xl">Title </label> <br />
             <input
               type="text"
               formControlName="bookTitle"
               placeholder="Enter Title"
-              class="font-light capitalize mb-3 focus:outline-none focus:border-blue-500"
+              class="lg:text-lg lg:py-3 lg:w-2/3 pl-5 py-2 w-full text-sm rounded-lg font-light capitalize mb-3 focus:outline-none focus:border-blue-500"
             />
             <br />
 
             <div *ngIf="form['bookTitle'].invalid">
               <p
-                class="mb-3 text-red-500 text-lg"
+                class="mb-3 text-red-500 lg:text-lg"
                 *ngIf="
                   form['bookTitle'].touched &&
                   bookForm.get('bookTitle')?.errors?.['required']
@@ -89,18 +91,19 @@
             </div>
 
             <!-- author -->
-            <label for="author">Author</label> <br />
+            <label for="author" class="text-xl lg:text-2xl">Author</label>
+            <br />
             <input
               type="text"
               formControlName="author"
               placeholder="Enter Author Name"
-              class="font-light capitalize mb-3 focus:outline-none focus:border-blue-500"
+              class="lg:text-lg lg:py-3 lg:w-2/3 pl-5 py-2 w-full text-sm rounded-lg font-light capitalize mb-3 focus:outline-none focus:border-blue-500"
             />
             <br />
 
             <div *ngIf="form['author'].invalid">
               <p
-                class="mb-3 text-red-500 text-lg"
+                class="mb-3 text-red-500 lg:text-lg"
                 *ngIf="
                   form['author'].touched &&
                   bookForm.get('author')?.errors?.['required']
@@ -111,8 +114,8 @@
             </div>
 
             <!-- select category -->
-            <label for="category">Category </label> <br />
-            <div class="grid grid-cols-3">
+            <label for="category" class="text-xl lg:text-2xl">Category </label> <br />
+            <div class="grid grid-cols-2 lg:grid-cols-3">
               <div
                 class="flex items-center"
                 *ngFor="
@@ -122,12 +125,12 @@
               >
                 <input
                   type="checkbox"
-                  class="checkboxSize"
+                  class="lg:w-5 lg:h-5"
                   [value]="category.categoryId"
                   (change)="handleMultipleCategoriesCheck($event)"
                   [checked]="bookCate$.includes(category.categoryId)"
                 />
-                <p class="pl-2 capitalize text-xl font-light py-1">
+                <p class="pl-2 capitalize lg:text-xl font-light py-1">
                   {{ category.categoryName }}
                 </p>
               </div>
@@ -152,19 +155,19 @@
         </div>
 
         <!-- description -->
-        <div class="px-20">
-          <label for="description">Description </label> <br />
+        <div class="lg:px-20 px-5">
+          <label for="description" class="text-xl lg:text-2xl">Description </label> <br />
           <textarea
             type="text"
             formControlName="description"
             placeholder="Enter a description"
-            class="font-light"
+            class="lg:text-lg lg:h-64 font-light w-full h-32 px-5 pt-2 rounded-lg"
           ></textarea>
           <br />
 
           <div *ngIf="form['description'].invalid">
             <p
-              class="mb-3 text-red-500 text-lg"
+              class="mb-3 text-red-500 lg:text-lg"
               *ngIf="
                 form['description'].touched &&
                 bookForm.get('description')?.errors?.['required']
@@ -175,12 +178,12 @@
           </div>
         </div>
 
-        <div class="px-20">
+        <div class="px-5 lg:px-20">
           <!-- button add -->
           <button
             [disabled]="bookForm.invalid"
             type="submit"
-            class="text-lg mt-2 py-2 px-8 rounded-xl bg-btnYellow"
+            class="lg:text-lg mt-2 py-2 px-8 rounded-xl bg-btnYellow"
             *ngIf="!tempBook"
           >
             Create New Book
@@ -188,7 +191,7 @@
 
           <button
             type="submit"
-            class="text-lg mt-2 py-2 px-8 rounded-xl bg-btnBg text-white"
+            class="lg:text-lg mt-2 py-2 px-8 rounded-xl bg-btnBg text-white"
             *ngIf="tempBook"
           >
             Update Book

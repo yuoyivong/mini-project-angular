@@ -1,5 +1,5 @@
 .active {
   border-bottom: 2px solid white;
-  color: white;
-  padding : 5px 0px;
+  color: red;
+  padding: 5px 15px;
 }

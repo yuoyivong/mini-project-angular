@@ -1,44 +1,48 @@
-<div class="h-[165vh] bg-contentBg">
+<div class="lg:h-[165vh] lg:bg-contentBg">
   <div
-    class="bg-no-repeat w-full bg-cover h-[500px] relative"
+    class="bg-no-repeat w-full bg-cover h-96 lg:h-[500px] relative"
     style="
       background-image: url('../../../assets/images/svg/Add\ Book\ Header.svg');
     "
   >
-    <div class="pt-10 pl-24 cursor-pointer">
+    <div class="w-10 md:w-full md:pl-10 pt-5 lg:pt-10 lg:pl-24 cursor-pointer">
       <button (click)="goToHomePage()">
         <img src="../../../assets/images/svg/Button.svg" alt="" />
       </button>
     </div>
 
-    <div class="bg-white h-[125vh] w-2/3 absolute z-10 top-44 left-80 rounded-lg">
+    <div
+      class="bg-white lg:h-[125vh] lg:w-2/3 lg:absolute lg:z-10 lg:top-44 lg:left-80 rounded-lg"
+    >
       <div class="absolute z-20">
-        <div class="flex">
+        <div class="md:flex">
           <img
-            class="w-72"
-            src="http://localhost:8080/images/{{ book.image }}"
+            class="lg:w-72"
+            src="http://localhost:8080/images/{{ book?.image }}"
             alt=""
           />
-          <div class="flex flex-col justify-center space-y-2">
-            <h5
-              class="text-blueText mb-2 text-4xl tracking-tight "
-            >
-              {{ book.bookTitle | titlecase }}
+          <div class="pl-5 md:flex md:flex-col md:justify-center md:space-y-1 lg:space-y-2">
+            <h5 class="text-blueText lg:text-blueText md:text-white mb-2 text-3xl lg:text-4xl tracking-tight">
+              {{ book?.bookTitle | titlecase }}
             </h5>
 
-            <p class="text-authorText text-2xl">{{ book.author | uppercase }}</p>
+            <p class="text-authorText text-xl lg:text-2xl">
+              {{ book?.author | uppercase }}
+            </p>
 
-            <ng-container *ngFor="let category of book.categoryList">
-              <p class="font-light text-xl">{{ category.categoryName | titlecase }}</p>
+            <ng-container *ngFor="let category of book?.categoryList">
+              <p class="font-light text-lg lg:text-xl">
+                {{ category.categoryName | titlecase }}
+              </p>
             </ng-container>
           </div>
         </div>
 
         <!-- desctiption -->
-        <div class="px-20">
+        <div class="p-5 md:px-10 lg:px-20">
           <p class="text-2xl">Description</p>
-          <p class="text-justify font-light text-lg">
-            {{ book.description }}
+          <p class="text-justify font-light md:text-lg lg:text-lg">
+            {{ book?.description }}
           </p>
         </div>
       </div>

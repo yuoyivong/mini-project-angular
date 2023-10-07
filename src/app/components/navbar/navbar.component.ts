@@ -14,8 +14,6 @@ export class NavbarComponent {
   isToggle: boolean = false;
 
   setIsToggle() {
-    console.log('Is toggle : ', this.isToggle);
-
     this.isToggle = !this.isToggle;
   }
 

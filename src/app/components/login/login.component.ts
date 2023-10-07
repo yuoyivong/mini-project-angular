@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { KeycloakProfile } from 'keycloak-js';
 import { KeycloakService } from 'keycloak-angular';
 import { LoginService } from 'src/app/services/login.service';
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           console.log('Get token after login with password and email');
 
           localStorage.setItem('token', res.access_token);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/book']);
         },
         error: (err) => {
           this.error = true;
@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit {
 
   submitLogin() {
     this.loginForm = new FormGroup({
-      email: new FormControl(null),
-      password: new FormControl(null),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required]),
     });
     console.log('Login form : ', this.loginForm);
   }
