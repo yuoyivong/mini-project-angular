@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first, map } from 'rxjs';
 import { Book } from 'src/app/models/book';
 import { Category } from 'src/app/models/category';
@@ -33,7 +33,8 @@ export class AddOrEditBookComponent implements OnInit {
     private formBuilder: FormBuilder,
     private bookService: BookService,
     private fileUploadService: FileUploadService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -143,6 +144,8 @@ export class AddOrEditBookComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
+
+    this.router.navigate(['/book']);
   }
 
   // update book by specific book id
@@ -172,6 +175,8 @@ export class AddOrEditBookComponent implements OnInit {
     } catch (err) {
       console.error(err);
     }
+
+    this.router.navigate(['/book']);
   }
 
   // get existing categories and concat with the new categories
@@ -240,4 +245,5 @@ export class AddOrEditBookComponent implements OnInit {
       });
     }
   }
+
 }

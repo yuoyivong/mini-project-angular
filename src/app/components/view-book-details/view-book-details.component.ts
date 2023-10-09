@@ -24,11 +24,13 @@ export class ViewBookDetailsComponent implements OnInit {
       this.bookId = +res.get('id')!;
     });
     this.getBookById();
+
+    window.scrollTo(0, 0);
   }
 
   getBookById() {
     this.bookService.getBookById(this.bookId).subscribe((res) => {
-      console.log("Book details : ", res.payload);
+      console.log('Book details : ', res.payload);
       this.book = res.payload;
     });
   }

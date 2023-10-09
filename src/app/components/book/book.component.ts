@@ -1,17 +1,5 @@
-import {
-  AfterContentChecked,
-  AfterContentInit,
-  AfterViewChecked,
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  DoCheck,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
 
@@ -24,6 +12,7 @@ export class BookComponent implements OnInit, OnDestroy {
   booksList: Book[] | undefined;
   deleteBookId: number = 0;
   categoryId: number | undefined;
+  isConnected: boolean = false;
 
   // pagination
   currentPage: number = 1;
@@ -71,10 +60,6 @@ export class BookComponent implements OnInit, OnDestroy {
         this.getAllBooks();
       }
     });
-
-    // this.currentPath = this.activatedRoute.snapshot.url
-    //   .map((segment) => segment.path)
-    //   .join('/');
   }
 
   // get all books from book service
@@ -95,6 +80,7 @@ export class BookComponent implements OnInit, OnDestroy {
   deleteBookById() {
     this.bookService.deleteBookById(this.deleteBookId).subscribe((res) => {
       console.log(res);
+      this.getAllBooks();
     });
   }
 

@@ -12,12 +12,12 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.router.events.subscribe((event) => {
-      if (!(event instanceof NavigationEnd)) {
-        return;
-      }
+    // this.router.events.subscribe((event) => {
+    //   if (!(event instanceof NavigationEnd)) {
+    //     return;
+    //   }
 
-      window.scrollTo(0, 0);
-    });
+    //   window.scrollTo(0, 0);
+    // });
   }
 }

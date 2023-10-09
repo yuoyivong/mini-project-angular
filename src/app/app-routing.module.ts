@@ -21,10 +21,10 @@ const routes: Routes = [
           {
             path: 'book',
             component: BookComponent,
-            loadChildren: () =>
-              import('./feature/home-page/home-page.module').then(
-                (m) => m.HomePageModule
-              ),
+            // loadChildren: () =>
+            //   import('./feature/home-page/home-page.module').then(
+            //     (m) => m.HomePageModule
+            //   ),
           },
         ],
       },

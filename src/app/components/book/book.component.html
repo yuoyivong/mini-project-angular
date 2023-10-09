@@ -4,7 +4,7 @@
   <div
     class="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-8 md:pr-10 md:pl-10"
   >
-    <div *ngFor="let book of getPaginatedBook()">
+    <div *ngFor="let book of booksList">
       <div
         class="lg:mx-0 md:mx-0 md:pb-0 pb-5 mx-5 flex flex-col justify-center items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row lg:hover:bg-gray-100"
       >
@@ -59,26 +59,22 @@
         </div>
       </div>
     </div>
-
-    <!-- <ngx-pagination [totalItems]></ngx-pagination> -->
-    <div>
-      <ul *ngIf="currentPage > 1">
-        <li>
-          <a (click)="prevPage()" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-      </ul>
-
-      <ul *ngIf="currentPage < booksList?.length! / pageSize">
-        <li>
-          <a (click)="nextPage()" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </div>
   </div>
+
+  <!-- <ngx-pagination [totalItems]></ngx-pagination> -->
+  <!-- <div class="flex justify-between mt-10 cursor-pointer">
+    <ul *ngIf="currentPage > 1">
+      <li class="text-red-500">
+        <a (click)="prevPage()" aria-label="Previous"> Previous </a>
+      </li>
+    </ul>
+
+    <ul *ngIf="currentPage < booksList?.length! / pageSize">
+      <li class="text-blueText">
+        <a (click)="nextPage()" aria-label="Next"> Next </a>
+      </li>
+    </ul>
+  </div> -->
 </div>
 
 <!-- Open the modal using ID.showModal() method -->
