@@ -44,9 +44,7 @@ export class HomeComponent implements OnInit {
     } else {
       this.router.navigate(['/book']);
       this.email = this._loginService.getEmail();
-      console.log(this.email);
-      console.log();
-      
+      console.log(this.email);    
     }
     // this.activatedRoute.queryParams.subscribe((res) => {
     //   console.log(res['code']);
