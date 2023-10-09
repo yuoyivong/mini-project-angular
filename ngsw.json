@@ -1,0 +1,109 @@
+{
+  "configVersion": 1,
+  "timestamp": 1696823582870,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/827.16789e6414572396.js",
+        "/923.91dd21ec8e6d1d24.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main.e89b4e8cfdfe1d97.js",
+        "/manifest.webmanifest",
+        "/polyfills.591ebbb29debdd6b.js",
+        "/runtime.b8ae0df72c2bdbf5.js",
+        "/styles.fc9ae2d3b410b91b.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/images/Login.png",
+        "/assets/images/svg/Add Book Header.svg",
+        "/assets/images/svg/Artboard 15@2x 1.svg",
+        "/assets/images/svg/Button.svg",
+        "/assets/images/svg/Group 7579.svg",
+        "/assets/images/svg/Group 7582.svg",
+        "/assets/images/svg/Group 7584.svg",
+        "/assets/images/svg/Group.svg",
+        "/assets/images/svg/Image Hero.svg",
+        "/assets/images/svg/Rich People Problem.svg",
+        "/assets/images/svg/icon.svg",
+        "/assets/images/svg/view.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/827.16789e6414572396.js": "b5757d917f9443f3a3168377144f803846eb48fe",
+    "/923.91dd21ec8e6d1d24.js": "24a1c52809ed4e6cd0ab1fb00ce2b7c5ed6b35ec",
+    "/assets/icons/icon-128x128.png": "b1f06c7d714abb4a0cc4d1f7c954feb26826e4c4",
+    "/assets/icons/icon-144x144.png": "96a0d629765c1bc85d9263c6bc83094ca776d267",
+    "/assets/icons/icon-152x152.png": "b1fbbee3902eb96a7658e3bb006f31f78ca5a44c",
+    "/assets/icons/icon-192x192.png": "e4211163bf0911688fbfb80278d8ff4d2f77691d",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "279825a1ac4377032ae996a1832c641e33ccf1b6",
+    "/assets/icons/icon-96x96.png": "592885efcbfee27e5e20be4fa3043589390d2740",
+    "/assets/images/Login.png": "b12917f43bdaa0b40c017f293dd9046991ada5d1",
+    "/assets/images/svg/Add Book Header.svg": "00eba881e4e47376e382d5b7f2a4aef7be965496",
+    "/assets/images/svg/Artboard 15@2x 1.svg": "da26baa7318c09671d2314bef1e02ec9ea4232f9",
+    "/assets/images/svg/Button.svg": "c9ffc81e6007c60270ca5813ccfce885cdb3f53a",
+    "/assets/images/svg/Group 7579.svg": "fd78aab12f3f370821ce6565e149e8100eab6cbd",
+    "/assets/images/svg/Group 7582.svg": "1b97768f7b321e41f9b8313be8ed40bf72253efa",
+    "/assets/images/svg/Group 7584.svg": "8a173edf797117fa7981180a38171171cd1da52c",
+    "/assets/images/svg/Group.svg": "164262cc4469b3077415fe22c26406b3e4b4a29b",
+    "/assets/images/svg/Image Hero.svg": "13909cabc98e7beba36ae29ad3ce28e2692e3851",
+    "/assets/images/svg/Rich People Problem.svg": "4d88c7563a082b2f220c0a6222b28c5e151c0fcc",
+    "/assets/images/svg/icon.svg": "cf2f73d608604a57de55c2239598d86df0b4a58b",
+    "/assets/images/svg/view.svg": "46c581f0ac1033cd519bba12b27717df012a7262",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "53723f63681cb3d161729cde80e7351ad8d4cc81",
+    "/main.e89b4e8cfdfe1d97.js": "ef6434f7c7fc20cdb5830bfd9c1459fdb5582b52",
+    "/manifest.webmanifest": "35b0d362166cd5debaed1d47bf6e2d808de1b3ca",
+    "/polyfills.591ebbb29debdd6b.js": "baac2ca7ad3cba2637d05d8a122732f3ef6d7951",
+    "/runtime.b8ae0df72c2bdbf5.js": "20f01a87a89e3601a99662ef37e544400ad29682",
+    "/styles.fc9ae2d3b410b91b.css": "a01439414fb2afca10a427193139234877137b5d"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

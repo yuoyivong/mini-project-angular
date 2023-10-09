@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkredo_angular_mini_project=self.webpackChunkredo_angular_mini_project||[]).push([[923],{7923:(i,o,t)=>{t.r(o),t.d(o,{AuthenticationModule:()=>_});var l=t(6814),r=t(95),a=t(4769);let _=(()=>{var n;class u{}return(n=u).\u0275fac=function(e){return new(e||n)},n.\u0275mod=a.oAB({type:n}),n.\u0275inj=a.cJS({imports:[l.ez,r.UX]}),u})()}}]);
