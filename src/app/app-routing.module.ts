@@ -8,6 +8,7 @@ import { BookComponent } from './components/book/book.component';
 import { ViewBookDetailsComponent } from './components/view-book-details/view-book-details.component';
 import { AddOrEditBookComponent } from './components/add-or-edit-book.component/add-or-edit-book.component';
 import { BookListComponent } from './components/book-list/book-list.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,12 @@ const routes: Routes = [
           import('./feature/authentication/authentication.module').then(
             (m) => m.AuthenticationModule
           ),
+      },
+      {
+        path: 'chat',
+        component: ChatComponent,
+        loadChildren: () =>
+          import('./feature/chat/chat.module').then((m) => m.ChatModule),
       },
       {
         path: 'book/:id',

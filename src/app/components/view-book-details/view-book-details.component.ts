@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/models/book';
 import { ApiResponse } from 'src/app/models/api-response';
 import { BookService } from 'src/app/services/book.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-view-book-details',
@@ -13,7 +14,8 @@ export class ViewBookDetailsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private bookService: BookService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
   bookId!: number;
   book!: Book;
@@ -36,6 +38,7 @@ export class ViewBookDetailsComponent implements OnInit {
   }
 
   goToHomePage() {
-    this.router.navigate(['/bookList']);
+    // this.router.navigate(['/book']);
+    this.location.back();
   }
 }

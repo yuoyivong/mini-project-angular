@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     if (!this._loginService.getIsLoggedIn()) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     } else {
       this.router.navigate(['/book']);
       this.email = this._loginService.getEmail();

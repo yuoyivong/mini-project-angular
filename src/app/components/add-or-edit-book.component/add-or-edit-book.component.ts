@@ -10,8 +10,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first, map } from 'rxjs';
 import { Book } from 'src/app/models/book';
 import { Category } from 'src/app/models/category';
+import { IFileUpload } from 'src/app/models/i-file-upload';
 import { BookService } from 'src/app/services/book.service';
+import { FileUploadFirebaseService } from 'src/app/services/file-upload-firebase.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
+
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-add-or-edit-book',
@@ -29,12 +33,20 @@ export class AddOrEditBookComponent implements OnInit {
   isUpdatedImage: boolean = false;
   bookCate$: number[] = [];
 
+  selectedFiles?: FileList;
+  currentFileUpload!: IFileUpload;
+  percentage: number = 0;
+
+  fileImageUrl: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private bookService: BookService,
     private fileUploadService: FileUploadService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private fileUploadToFirebase: FileUploadFirebaseService,
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -87,10 +99,10 @@ export class AddOrEditBookComponent implements OnInit {
     this.isUpdatedImage = true;
 
     const file = (event.target as HTMLInputElement).files?.[0];
-    this.bookForm.patchValue({
-      image: file,
-    });
-    this.bookForm.get('image')?.updateValueAndValidity();
+    // this.bookForm.patchValue({
+    //   image: file,
+    // });
+    // this.bookForm.get('image')?.updateValueAndValidity();
 
     // file preview
     const reader = new FileReader();
@@ -101,6 +113,8 @@ export class AddOrEditBookComponent implements OnInit {
       console.log('File : ', file.name);
       reader.readAsDataURL(file);
     }
+
+    this.selectedFiles = event.target.files;
   }
 
   submitBook() {
@@ -108,20 +122,47 @@ export class AddOrEditBookComponent implements OnInit {
     this.saveBook();
   }
 
+  // fileUpload(): Promise<string> {
+  //   return new Promise<string>((resolve, reject) => {
+  //     this.fileUploadService.uploadImage(this.bookForm.value.image).subscribe(
+  //       (res) => {
+  //         console.log('image name : ', res.payload);
+  //         resolve(res.payload);
+  //         // this.fileUploadService
+  //         //   .getImageByItsName(res.payload)
+  //         //   .subscribe((res) => console.log('response image : ', res));
+  //       },
+  //       (error) => {
+  //         reject(error);
+  //       }
+  //     );
+  //   });
+  // }
+
+  // upload file to firebase storage
   fileUpload(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-      this.fileUploadService.uploadImage(this.bookForm.value.image).subscribe(
-        (res) => {
-          console.log('image name : ', res.payload);
-          resolve(res.payload);
-          // this.fileUploadService
-          //   .getImageByItsName(res.payload)
-          //   .subscribe((res) => console.log('response image : ', res));
-        },
-        (error) => {
-          reject(error);
+      if (this.selectedFiles) {
+        const file: File | null = this.selectedFiles.item(0);
+        this.selectedFiles = undefined;
+
+        if (file) {
+          this.currentFileUpload = { ...this.currentFileUpload, file: file };
+          this.fileImageUrl = this.fileUploadToFirebase.pushFileToStorage(
+            this.currentFileUpload
+          );
+          resolve(this.fileImageUrl);
+
+          // .subscribe(
+          //   (res) => {
+          //     console.log('Image url exists : ', res);
+
+          //     // this.percentage = Math.round(percentage ? percentage : 0);
+          //   },
+          //   (error) => console.error(error)
+          // );
         }
-      );
+      }
     });
   }
 
@@ -129,6 +170,7 @@ export class AddOrEditBookComponent implements OnInit {
   async createBook() {
     try {
       const image = await this.fileUpload();
+      console.log(image);
 
       const bookData = {
         ...this.bookForm.value,
@@ -152,9 +194,12 @@ export class AddOrEditBookComponent implements OnInit {
   async updatedBookById() {
     try {
       if (this.isUpdatedImage) {
+        const updatedImage = await this.fileUpload();
+
         let updatedBookData = {
           ...this.bookForm.value,
-          image: (await this.fileUpload()) ?? this.bookForm.value.image,
+          categoryId: this.summaryCategories,
+          image: updatedImage,
         };
 
         const updatedBook = await this.bookService
@@ -245,5 +290,4 @@ export class AddOrEditBookComponent implements OnInit {
       });
     }
   }
-
 }

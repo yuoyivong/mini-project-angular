@@ -33,12 +33,22 @@
 
             <li (click)="isToggle = false">
               <a
+                routerLink="/chat"
+                routerLinkActive="active"
+                class="block py-2 lg:pl-3 lg:pr-4 text-gray-900 md:text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                >Chat</a
+              >
+            </li>
+
+            <li (click)="isToggle = false">
+              <a
                 routerLink="/bookList"
                 routerLinkActive="active"
                 class="block py-2 lg:pl-3 lg:pr-4 text-gray-900 md:text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
                 >Book</a
               >
             </li>
+
             <li>
               <button
                 class="text-blueText md:bg-white md:py-2 md:px-6 rounded-2xl"

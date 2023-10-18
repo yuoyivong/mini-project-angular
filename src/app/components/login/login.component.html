@@ -36,9 +36,8 @@
                 formControlName="email"
                 type="text"
                 id="input-group-1"
-                class="py-3 pl-5 w-full border border-gray-300 text-gray-900 rounded-lg"
+                class="focus:outline-none focus:border-blue-500 py-3 pl-5 w-full border border-gray-300 text-gray-900 rounded-lg"
                 placeholder="Email / Username"
-                appEmailValidation
               />
 
               <!-- validate email error -->
@@ -71,8 +70,7 @@
                 formControlName="password"
                 placeholder="Password"
                 id="input-group-1"
-                class="py-3 pl-5 w-full border border-gray-300 text-gray-900 rounded-lg"
-                appPasswordValidation
+                class="focus:outline-none focus:border-blue-500 py-3 pl-5 w-full border border-gray-300 text-gray-900 rounded-lg"
               />
 
               <!-- password validation -->
@@ -116,14 +114,22 @@
                 <p>Log in</p>
               </button>
 
-              <button
-                class="lg:text-lg mt-5 w-full rounded-lg bg-red-400 text-white text-center py-3"
+              <!-- <button
+                class="lg:text-lg mt-5 w-full rounded-lg border-2 text-blueText text-center py-2"
               >
                 <a
                   href="http://localhost:9900/auth/realms/angular-project/protocol/openid-connect/auth?client_id=google-login-keycloak&redirect_uri=http://localhost:4200/home&response_type=code&scope=openid&kc_idp_hint=google"
-                  ><p>Login with google</p></a
                 >
-              </button>
+                  <div class="flex justify-center items-center gap-5">
+                    <img
+                      src="../../../assets/images/svg/google-color-svgrepo-com.svg"
+                      alt="google icon"
+                      class="w-8 h-8"
+                    />
+                    <p>Login with google</p>
+                  </div>
+                </a>
+              </button> -->
             </div>
             <!-- <button
               class="w-full rounded-lg bg-btnBg text-white text-center py-1.5"

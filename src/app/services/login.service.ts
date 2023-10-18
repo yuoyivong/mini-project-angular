@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { env } from '../environment/env';
 
 @Injectable({
   providedIn: 'root',
@@ -11,29 +12,47 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
+  // login with keycloak
+  // public login(email: string, password: string): Observable<any> {
+  //   console.log('Email : ', email);
+  //   console.log('Password : ', password);
+
+  //   const headers = new HttpHeaders().set(
+  //     'Content-Type',
+  //     'application/x-www-form-urlencoded;'
+  //   );
+
+  //   const body = new HttpParams()
+  //     .set('grant_type', 'password')
+  //     .set('username', email)
+  //     .set('password', password)
+  //     .set('client_id', 'redo-mini-project-angular')
+  //     .set('client_secret', 'dyOaPhersjobmLUVT6fMLJUfDKXoB2AV');
+
+  //   return this.http.post(
+  //     'http://localhost:9900/auth/realms/angular-project/protocol/openid-connect/token',
+  //     body,
+  //     { headers: headers }
+  //   );
+  // }
+
+  // login to get jwt token
   public login(email: string, password: string): Observable<any> {
     console.log('Email : ', email);
     console.log('Password : ', password);
 
-    const headers = new HttpHeaders().set(
-      'Content-Type',
-      'application/x-www-form-urlencoded;'
-    );
+    // const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    const body = new HttpParams()
-      .set('grant_type', 'password')
-      .set('username', email)
-      .set('password', password)
-      .set('client_id', 'redo-mini-project-angular')
-      .set('client_secret', 'dyOaPhersjobmLUVT6fMLJUfDKXoB2AV');
+    // const body = new HttpParams().set('email', email).set('password', password);
 
     return this.http.post(
-      'http://localhost:9900/auth/realms/angular-project/protocol/openid-connect/token',
-      body,
-      { headers: headers }
+      `${env.baseUrl}/auth/login`,
+      { email: email, password: password },
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
     );
   }
-
   public logout() {
     localStorage.clear();
   }

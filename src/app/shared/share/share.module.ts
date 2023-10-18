@@ -8,6 +8,7 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { FilterUniqueCategoryPipe } from 'src/app/pipes/filter-unique-category.pipe';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SortPipe } from 'src/app/pipes/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AccessControlDirective,
     SearchPipe,
     FilterUniqueCategoryPipe,
+    SortPipe
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [

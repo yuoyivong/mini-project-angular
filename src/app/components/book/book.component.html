@@ -4,13 +4,13 @@
   <div
     class="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-8 md:pr-10 md:pl-10"
   >
-    <div *ngFor="let book of booksList">
+    <div *ngFor="let book of booksList | sort : 'bookTitle'">
       <div
-        class="lg:mx-0 md:mx-0 md:pb-0 pb-5 mx-5 flex flex-col justify-center items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row lg:hover:bg-gray-100"
+        class="lg:mx-0 md:mx-0 md:pb-0 pb-5 mx-5 flex flex-col justify-center items-center bg-white md:h-72 border border-gray-200 rounded-lg shadow md:flex-row lg:hover:bg-gray-100"
       >
         <img
-          class="h-80 object-cover rounded-t-lg md:h-auto md:rounded-none md:rounded-l-lg"
-          src="http://localhost:8080/images/{{ book.image }}"
+          class="mt-5 md:w-80  h-80 object-cover rounded-t-lg md:h-auto md:rounded-none md:rounded-l-lg"
+          src="{{ book.image }}"
           alt=""
         />
 

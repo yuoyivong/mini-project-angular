@@ -7,9 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RadioValidatorPipe } from './pipes/radio-validator.pipe';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { HomePageModule } from './feature/home-page/home-page.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+// import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { firebase_env } from './environment/environment';
 
 function initailizeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -57,14 +62,17 @@ function initailizeKeyCloakGoogle(keycloakGoogle: KeycloakService) {
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule,
     HomePageModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
+    AngularFireModule.initializeApp(firebase_env.firebaseConfig),
+    AngularFireDatabaseModule,
+    // AngularFirestoreModule,
+    AngularFireStorageModule,
   ],
   providers: [
     {

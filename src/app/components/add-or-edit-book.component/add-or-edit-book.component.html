@@ -29,7 +29,7 @@
                 accept="image/*"
                 (change)="showPreview($event)"
                 class="file-upload"
-                #fileUplaod
+                #fileUplaodImg
               />
 
               <ng-template
@@ -39,7 +39,7 @@
                 <img
                   [src]="imageUrl"
                   [alt]="bookForm.value.name"
-                  (click)="fileUplaod.click()"
+                  (click)="fileUplaodImg.click()"
                   class="cursor-pointer"
                 />
               </ng-template>
@@ -48,15 +48,15 @@
                 <ng-container *ngIf="!tempBook">
                   <img
                     src="../../../assets/images/svg/{{ defaultImage }}"
-                    (click)="fileUplaod.click()"
+                    (click)="fileUplaodImg.click()"
                     class="cursor-pointer"
                   />
                 </ng-container>
 
                 <ng-container *ngIf="tempBook">
                   <img
-                    src="http://localhost:8080/images/{{ tempBook.image }}"
-                    (click)="fileUplaod.click()"
+                    src="{{ tempBook.image }}"
+                    (click)="fileUplaodImg.click()"
                     class="cursor-pointer"
                   />
                 </ng-container>

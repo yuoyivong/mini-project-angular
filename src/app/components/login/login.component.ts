@@ -39,13 +39,14 @@ export class LoginComponent implements OnInit {
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe({
         next: (res: any) => {
-          console.log('Get token after login with password and email');
+          console.log('Get token after login with password and email', res);
 
-          localStorage.setItem('token', res.access_token);
+          localStorage.setItem('token', res.token);
           this.router.navigate(['/book']);
         },
         error: (err) => {
           this.error = true;
+          console.log(err);
         },
       });
   }
